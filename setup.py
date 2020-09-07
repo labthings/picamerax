@@ -73,7 +73,7 @@ __keywords__ = [
     "camera",
 ]
 
-__requires__ = []
+__requires__ = ["colorzero"]
 
 __extra_requires__ = {
     "doc": ["sphinx"],
