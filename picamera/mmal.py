@@ -621,7 +621,16 @@ class MMAL_PARAMETER_LOGGING_T(ct.Structure):
     MMAL_PARAMETER_DPF_CONFIG,
     MMAL_PARAMETER_JPEG_RESTART_INTERVAL,
     MMAL_PARAMETER_CAMERA_ISP_BLOCK_OVERRIDE,
-) = range(MMAL_PARAMETER_GROUP_CAMERA, MMAL_PARAMETER_GROUP_CAMERA + 82)
+    MMAL_PARAMETER_LENS_SHADING_OVERRIDE,
+    MMAL_PARAMETER_BLACK_LEVEL,
+    MMAL_PARAMETER_RESIZE_PARAMS,
+    MMAL_PARAMETER_CROP,
+    MMAL_PARAMETER_OUTPUT_SHIFT,
+    MMAL_PARAMETER_CCM_SHIFT,
+    MMAL_PARAMETER_CUSTOM_CCM,
+    MMAL_PARAMETER_ANALOG_GAIN,
+    MMAL_PARAMETER_DIGITAL_GAIN, 
+) = range(MMAL_PARAMETER_GROUP_CAMERA, MMAL_PARAMETER_GROUP_CAMERA + 91)
 
 class MMAL_PARAMETER_THUMBNAIL_CONFIG_T(ct.Structure):
     _fields_ = [
@@ -692,7 +701,8 @@ MMAL_PARAM_AWBMODE_T = ct.c_uint32 # enum
     MMAL_PARAM_AWBMODE_INCANDESCENT,
     MMAL_PARAM_AWBMODE_FLASH,
     MMAL_PARAM_AWBMODE_HORIZON,
-) = range(10)
+    MMAL_PARAM_AWBMODE_GREYWORLD,
+) = range(11)
 MMAL_PARAM_AWBMODE_MAX = 0x7fffffff
 
 class MMAL_PARAMETER_AWBMODE_T(ct.Structure):
@@ -1330,6 +1340,18 @@ class MMAL_PARAMETER_CAMERA_RX_TIMING_T(ct.Structure):
         ('cpi_timing2',         ct.c_uint32),
         ]
 
+class MMAL_PARAMETER_LENS_SHADING_T(ct.Structure):
+    _fields_ = [
+        ('hdr',                 MMAL_PARAMETER_HEADER_T),
+        ('enabled',             MMAL_BOOL_T),
+        ('grid_cell_size',      ct.c_uint32),
+        ('grid_width',          ct.c_uint32),
+        ('grid_stride',         ct.c_uint32),
+        ('grid_height',         ct.c_uint32),
+        ('mem_handle_table',    ct.c_uint32),
+        ('ref_transform',       ct.c_uint32),
+        ]
+        
 # mmal_parameters_video.h ####################################################
 
 (
