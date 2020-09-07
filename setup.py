@@ -28,7 +28,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-"""A pure Python interface for the Raspberry Pi camera module."""
+"""A pure Python interface for the Raspberry Pi camera module, with extra features and fixes."""
 
 import os
 import sys
