@@ -7,68 +7,7 @@ Installation
 .. currentmodule:: picamerax
 
 
-.. _raspbian_install:
-
-Raspbian installation
-=====================
-
-If you are using the `Raspbian`_ distro, you probably have picamerax installed
-by default. You can find out simply by starting Python and trying to import
-picamerax:
-
-.. code-block:: console
-
-    $ python -c "import picamerax"
-    $ python3 -c "import picamerax"
-
-If you get no error, you've already got picamerax installed! Just continue to
-:ref:`quickstart`. If you don't have picamerax installed you'll see something
-like the following:
-
-.. code-block:: console
-
-    $ python -c "import picamerax"
-    Traceback (most recent call last):
-      File "<string>", line 1, in <module>
-    ImportError: No module named picamerax
-    $ python3 -c "import picamerax"
-    Traceback (most recent call last):
-      File "<string>", line 1, in <module>
-    ImportError: No module named 'picamerax'
-
-To install picamerax on Raspbian, it is best to use the system's package
-manager: apt. This will ensure that picamerax is easy to keep up to date, and
-easy to remove should you wish to do so. It will also make picamerax available
-for all users on the system. To install picamerax using apt simply run:
-
-.. code-block:: console
-
-    $ sudo apt-get update
-    $ sudo apt-get install python-picamerax python3-picamerax
-
-To upgrade your installation when new releases are made you can simply use
-apt's normal upgrade procedure:
-
-.. code-block:: console
-
-    $ sudo apt-get update
-    $ sudo apt-get upgrade
-
-If you ever need to remove your installation:
-
-.. code-block:: console
-
-    $ sudo apt-get remove python-picamerax python3-picamerax
-
-
-
-.. _non_raspbian_install:
-
-Alternate distro installation
-=============================
-
-On distributions other than Raspbian, it is probably simplest to install system
-wide using Python's ``pip`` tool:
+It is simplest to install system wide using Python's ``pip`` tool:
 
 .. code-block:: console
 
