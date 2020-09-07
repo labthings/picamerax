@@ -27,7 +27,7 @@ more experimental software features, to be easily used much earlier than they wo
 Installation
 ------------
 
-.. code-block:: shell
+.. code-block::
   pip install picamerax
 
 Links
