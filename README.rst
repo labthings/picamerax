@@ -10,6 +10,21 @@ PiCamera + Extras
 This package provides a pure Python interface to the `Raspberry Pi`_ `camera`_
 module for Python 3.2 or above, with extra features and fixes.
 
+* Lens-shading table support (from rwb27/master)
+* Read-write analog gain (from rwb27/master)
+* Greyworld AWB (from chrisruk/greyworld)
+* Bayer array support for HQ camera (from AlecVercruysse/master)
+* Dropped support for Python 2
+
+Why?
+----
+
+The upstream waveform80/picamera library has reached a point of stability meaning some more cutting-edge 
+features will be unsuitable for inclusion, or face delays. 
+This fork will include new features and fixes more rapidly, allowing the latest camera revisions, and
+more experimental software features, to be easily used much earlier than they would otherwise.
+
+
 Links
 =====
 
