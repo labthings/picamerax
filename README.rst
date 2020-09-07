@@ -28,6 +28,7 @@ Installation
 ------------
 
 .. code-block::
+
   pip install picamerax
 
 Links
