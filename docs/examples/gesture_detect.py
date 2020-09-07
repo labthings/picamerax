@@ -1,7 +1,7 @@
 import os
 import numpy as np
-import picamera
-from picamera.array import PiMotionAnalysis
+import picamerax
+from picamerax.array import PiMotionAnalysis
 
 class GestureDetector(PiMotionAnalysis):
     QUEUE_SIZE = 10 # the number of consecutive frames to analyze
@@ -40,7 +40,7 @@ class GestureDetector(PiMotionAnalysis):
             if movement:
                 print(movement)
 
-with picamera.PiCamera(resolution='VGA', framerate=24) as camera:
+with picamerax.PiCamera(resolution='VGA', framerate=24) as camera:
     with GestureDetector(camera) as detector:
         camera.start_recording(
             os.devnull, format='h264', motion_output=detector)

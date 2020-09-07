@@ -1,4 +1,4 @@
-import picamera
+import picamerax
 
 class MyOutput(object):
     def __init__(self):
@@ -10,7 +10,7 @@ class MyOutput(object):
     def flush(self):
         print('%d bytes would have been written' % self.size)
 
-with picamera.PiCamera() as camera:
+with picamerax.PiCamera() as camera:
     camera.resolution = (640, 480)
     camera.framerate = 60
     camera.start_recording(MyOutput(), format='h264')

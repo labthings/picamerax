@@ -4,14 +4,14 @@
 Advanced Recipes
 ================
 
-.. currentmodule:: picamera
+.. currentmodule:: picamerax
 
 The following recipes involve advanced techniques and may not be "beginner
 friendly". Please feel free to suggest enhancements or additional recipes.
 
 .. warning::
 
-    When trying out these scripts do *not* name your file :file:`picamera.py`.
+    When trying out these scripts do *not* name your file :file:`picamerax.py`.
     Naming scripts after existing Python modules will cause errors when you
     try and import those modules (because Python checks the current directory
     before checking other paths).
@@ -22,7 +22,7 @@ friendly". Please feel free to suggest enhancements or additional recipes.
 Capturing to a numpy array
 ==========================
 
-Since 1.11, picamera can capture directly to any object which supports Python's
+Since 1.11, picamerax can capture directly to any object which supports Python's
 buffer protocol (including numpy's :class:`~numpy.ndarray`). Simply pass the
 object as the destination of the capture and the image data will be written
 directly to the object. The target object must fulfil various requirements
@@ -146,7 +146,7 @@ manner:
     :func:`numpy.fromfile` method annoyingly only accepts "real" file objects.
 
 This recipe is now encapsulated in the :class:`~array.PiYUVArray` class in the
-:mod:`picamera.array` module, which means the same can be achieved as follows:
+:mod:`picamerax.array` module, which means the same can be achieved as follows:
 
 .. literalinclude:: examples/yuv_capture3.py
 
@@ -156,7 +156,7 @@ components, this isn't directly useful (if you need all three components,
 you're better off using :class:`~array.PiYUVArray` as this rescales the UV
 components for convenience). However, if you only require the Y plane you can
 provide a buffer just large enough for this plane and ignore the error that
-occurs when writing to the buffer (picamera will deliberately write as much as
+occurs when writing to the buffer (picamerax will deliberately write as much as
 it can to the buffer before raising an exception to support this use-case):
 
 .. literalinclude:: examples/yuv_capture4.py
@@ -179,7 +179,7 @@ RGB data directly.
     Simply use the ``'yuv'`` format instead, as shown in the code above.
 
 .. versionchanged:: 1.5
-    Added note about new :mod:`picamera.array` module.
+    Added note about new :mod:`picamerax.array` module.
 
 .. versionchanged:: 1.11
     Added instructions for direct array capture.
@@ -247,7 +247,7 @@ it is trivial to capture directly into a numpy array (Python 3.x only; see
     Simply use the ``'rgb'`` format instead, as shown in the code above.
 
 .. versionchanged:: 1.5
-    Added note about new :mod:`picamera.array` module.
+    Added note about new :mod:`picamerax.array` module.
 
 .. versionchanged:: 1.11
     Added instructions for direct array capture.
@@ -258,11 +258,11 @@ it is trivial to capture directly into a numpy array (Python 3.x only; see
 Custom outputs
 ==============
 
-All methods in the picamera library which accept a filename also accept
+All methods in the picamerax library which accept a filename also accept
 file-like objects. Typically, this is only used with actual file objects, or
 with memory streams (like :class:`io.BytesIO`). However, building a custom
 output object is extremely easy and in certain cases very useful. A file-like
-object (as far as picamera is concerned) is simply an object with a ``write``
+object (as far as picamerax is concerned) is simply an object with a ``write``
 method which must accept a single parameter consisting of a byte-string, and
 which can optionally return the number of bytes written. The object can
 optionally implement a ``flush`` method (which has no parameters), which will
@@ -296,7 +296,7 @@ destination for the video data:
 
 .. literalinclude:: examples/custom_outputs_motion_detector.py
 
-You may wish to investigate the classes in the :mod:`picamera.array` module
+You may wish to investigate the classes in the :mod:`picamerax.array` module
 which implement several custom outputs for analysis of data with numpy. In
 particular, the :class:`~array.PiMotionAnalysis` class can be used to remove
 much of the boiler plate code from the recipe above:
@@ -311,7 +311,7 @@ much of the boiler plate code from the recipe above:
 Unconventional file outputs
 ===========================
 
-As noted in prior sections, picamera accepts a wide variety of things as an
+As noted in prior sections, picamerax accepts a wide variety of things as an
 output:
 
 * A string, which will be treated as a filename.
@@ -320,10 +320,10 @@ output:
 * Any mutable object that implements the buffer interface.
 
 The simplest of these, the filename, hides a certain amount of complexity. It
-can be important to understand exactly how picamera treats files, especially
+can be important to understand exactly how picamerax treats files, especially
 when dealing with "unconventional" files (e.g. pipes, FIFOs, etc.)
 
-When given a filename, picamera does the following:
+When given a filename, picamerax does the following:
 
 1. Opens the specified file with the ``'wb'`` mode, i.e. open for writing,
    truncating the file first, in binary mode.
@@ -337,12 +337,12 @@ When given a filename, picamera does the following:
    open file.
 
 4. Finally, the file is flushed and closed. Note that this is the only
-   circumstance in which picamera will presume to close the output for you,
-   because picamera opened the output for you.
+   circumstance in which picamerax will presume to close the output for you,
+   because picamerax opened the output for you.
 
 As noted above, this fits the majority use case (sequentially writing video to
 a file) very well. However, if you are piping data to another process via a
-FIFO (which picamera will simply treat as any other file), you may wish to
+FIFO (which picamerax will simply treat as any other file), you may wish to
 avoid all the buffering. In this case, you can simply open the output yourself
 with no buffering. As noted above, you will then be responsible for closing the
 output when you are finished with it (you opened it, so the responsibility for
@@ -434,7 +434,7 @@ Unencoded video capture
 Just as unencoded RGB data can be captured as images, the Pi's camera module
 can also capture an unencoded stream of RGB (or YUV) video data. Combining this with
 the methods presented in :ref:`custom_outputs` (via the classes from
-:mod:`picamera.array`), we can produce a fairly rapid color detection script:
+:mod:`picamerax.array`), we can produce a fairly rapid color detection script:
 
 .. literalinclude:: examples/color_detect.py
 
@@ -588,7 +588,7 @@ from the magnitude of each frame's motion vectors:
 .. literalinclude:: examples/motion_data3.py
 
 You may wish to investigate the :class:`~array.PiMotionArray` and
-:class:`~array.PiMotionAnalysis` classes in the :mod:`picamera.array` module
+:class:`~array.PiMotionAnalysis` classes in the :mod:`picamerax.array` module
 which simplifies the above recipes to the following:
 
 .. literalinclude:: examples/motion_data4.py
@@ -666,8 +666,8 @@ most of the information (I-frame, P-frame, motion information, etc.) would be
 accessible from the :attr:`~PiCamera.frame` attribute which you could access
 from your custom output's ``write`` method.
 
-The encoder classes defined by picamera form the following hierarchy (dark
-classes are actually instantiated by the implementation in picamera, light
+The encoder classes defined by picamerax form the following hierarchy (dark
+classes are actually instantiated by the implementation in picamerax, light
 classes implement base functionality but aren't technically "abstract"):
 
 .. image:: images/encoder_classes.*
@@ -772,7 +772,7 @@ captures:
 
 An enhanced version of this recipe (which also handles different bayer orders
 caused by flips and rotations) is also encapsulated in the
-:class:`~picamera.array.PiBayerArray` class in the :mod:`picamera.array`
+:class:`~picamerax.array.PiBayerArray` class in the :mod:`picamerax.array`
 module, which means the same can be achieved as follows:
 
 .. literalinclude:: examples/bayer_array.py
@@ -780,7 +780,7 @@ module, which means the same can be achieved as follows:
 .. versionadded:: 1.3
 
 .. versionchanged:: 1.5
-    Added note about new :mod:`picamera.array` module.
+    Added note about new :mod:`picamerax.array` module.
 
 
 .. _flash_configuration:
@@ -922,9 +922,9 @@ directory of the first partition on the SD card. Once you have rebooted the Pi
 (to activate the new device tree configuration) you can test the flash with the
 following simple script::
 
-    import picamera
+    import picamerax
 
-    with picamera.PiCamera() as camera:
+    with picamerax.PiCamera() as camera:
         camera.flash_mode = 'on'
         camera.capture('foo.jpg')
 

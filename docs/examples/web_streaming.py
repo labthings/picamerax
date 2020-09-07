@@ -1,5 +1,5 @@
 import io
-import picamera
+import picamerax
 import logging
 import socketserver
 from threading import Condition
@@ -8,7 +8,7 @@ from http import server
 PAGE="""\
 <html>
 <head>
-<title>picamera MJPEG streaming demo</title>
+<title>picamerax MJPEG streaming demo</title>
 </head>
 <body>
 <h1>PiCamera MJPEG Streaming Demo</h1>
@@ -77,7 +77,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
     daemon_threads = True
 
-with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
+with picamerax.PiCamera(resolution='640x480', framerate=24) as camera:
     output = StreamingOutput()
     camera.start_recording(output, format='mjpeg')
     try:

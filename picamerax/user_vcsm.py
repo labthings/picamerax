@@ -37,7 +37,7 @@
 Wraps the VideoCore Shared Memory library in Python.
 
 This Python module wraps the necessary functions from the Raspberry Pi 
-``userland`` module to allow shared memory use in ``picamera``.  Currently
+``userland`` module to allow shared memory use in ``picamerax``.  Currently
 this is only used to load a custom lens shading table.  Please see the
 comments in [user_vcsm.h](https://github.com/raspberrypi/userland/
 blob/master/host_applications/linux/libs/sm/user-vcsm.h).

@@ -4,9 +4,9 @@
 API - vcsmobj
 =============
 
-.. module:: picamera.vcsmobj
+.. module:: picamerax.vcsmobj
 
-.. currentmodule:: picamera.vcsmobj
+.. currentmodule:: picamerax.vcsmobj
 
 This module provides an object-oriented interface to the VideoCore shared
 memory API, to make it simpler to use from Python.
@@ -19,7 +19,7 @@ memory API, to make it simpler to use from Python.
 
 The Shared Memory Interface
 ===========================
-Some MMAL functions (see :mod:`~picamera.mmalobj`) need to pass larger amounts
+Some MMAL functions (see :mod:`~picamerax.mmalobj`) need to pass larger amounts
 of information to the GPU, which we can achieve using shared memory.  The API
 doesn't provide a persistent way to "hold on" to a block of shared memory, which
 means this transfer is effectively one way, i.e. it allows us to transfer data
@@ -54,7 +54,7 @@ and creating an array to send to the GPU.  This uses ``numpy`` to create a
 
 .. code-block:: pycon
 
-    >>> from picamera.vcsmobj import VideoCoreSharedMemory
+    >>> from picamerax.vcsmobj import VideoCoreSharedMemory
     >>> import numpy as np
     >>> w = 10
     >>> h = 10

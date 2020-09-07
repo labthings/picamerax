@@ -1,9 +1,9 @@
 import time
-import picamera
-import picamera.array
+import picamerax
+import picamerax.array
 import numpy as np
 
-with picamera.PiCamera() as camera:
+with picamerax.PiCamera() as camera:
     camera.resolution = (100, 100)
     time.sleep(2)
     image = np.empty((128, 112, 3), dtype=np.uint8)

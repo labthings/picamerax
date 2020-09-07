@@ -1,10 +1,10 @@
 import numpy as np
-import picamera
-import picamera.array
+import picamerax
+import picamerax.array
 from PIL import Image
 
-with picamera.PiCamera() as camera:
-    with picamera.array.PiMotionArray(camera) as stream:
+with picamerax.PiCamera() as camera:
+    with picamerax.array.PiMotionArray(camera) as stream:
         camera.resolution = (640, 480)
         camera.framerate = 30
         camera.start_recording('/dev/null', format='h264', motion_output=stream)

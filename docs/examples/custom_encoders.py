@@ -1,8 +1,8 @@
-import picamera
-import picamera.mmal as mmal
+import picamerax
+import picamerax.mmal as mmal
 
 # Override PiVideoEncoder to keep track of the number of each type of frame
-class MyEncoder(picamera.PiCookedVideoEncoder):
+class MyEncoder(picamerax.PiCookedVideoEncoder):
     def start(self, output, motion_output=None):
         self.parent.i_frames = 0
         self.parent.p_frames = 0
@@ -23,7 +23,7 @@ class MyEncoder(picamera.PiCookedVideoEncoder):
         return super(MyEncoder, self)._callback_write(buf)
 
 # Override PiCamera to use our custom encoder for video recording
-class MyCamera(picamera.PiCamera):
+class MyCamera(picamerax.PiCamera):
     def __init__(self):
         super(MyCamera, self).__init__()
         self.i_frames = 0

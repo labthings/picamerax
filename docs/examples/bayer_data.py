@@ -8,12 +8,12 @@ from __future__ import (
 
 import io
 import time
-import picamera
+import picamerax
 import numpy as np
 from numpy.lib.stride_tricks import as_strided
 
 stream = io.BytesIO()
-with picamera.PiCamera() as camera:
+with picamerax.PiCamera() as camera:
     # Let the camera warm up for a couple of seconds
     time.sleep(2)
     # Capture the image, including the Bayer data

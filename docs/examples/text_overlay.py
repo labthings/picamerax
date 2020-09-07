@@ -1,7 +1,7 @@
-import picamera
+import picamerax
 import time
 
-camera = picamera.PiCamera()
+camera = picamerax.PiCamera()
 camera.resolution = (640, 480)
 camera.framerate = 24
 camera.start_preview()

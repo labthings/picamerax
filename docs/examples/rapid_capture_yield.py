@@ -1,5 +1,5 @@
 import time
-import picamera
+import picamerax
 
 frames = 60
 
@@ -9,7 +9,7 @@ def filenames():
         yield 'image%02d.jpg' % frame
         frame += 1
 
-with picamera.PiCamera(resolution='720p', framerate=30) as camera:
+with picamerax.PiCamera(resolution='720p', framerate=30) as camera:
     camera.start_preview()
     # Give the camera some warm-up time
     time.sleep(2)

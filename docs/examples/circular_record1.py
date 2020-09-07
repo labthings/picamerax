@@ -1,12 +1,12 @@
 import random
-import picamera
+import picamerax
 
 def motion_detected():
     # Randomly return True (like a fake motion detection routine)
     return random.randint(0, 10) == 0
 
-camera = picamera.PiCamera()
-stream = picamera.PiCameraCircularIO(camera, seconds=20)
+camera = picamerax.PiCamera()
+stream = picamerax.PiCameraCircularIO(camera, seconds=20)
 camera.start_recording(stream, format='h264')
 try:
     while True:

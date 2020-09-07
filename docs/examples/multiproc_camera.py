@@ -3,7 +3,7 @@ import io
 import time
 import multiprocessing as mp
 from queue import Empty
-import picamera
+import picamerax
 from PIL import Image
 
 class QueueOutput(object):
@@ -28,7 +28,7 @@ class QueueOutput(object):
         self.finished.set()
 
 def do_capture(queue, finished):
-    with picamera.PiCamera(resolution='VGA', framerate=30) as camera:
+    with picamerax.PiCamera(resolution='VGA', framerate=30) as camera:
         output = QueueOutput(queue, finished)
         camera.start_recording(output, format='mjpeg')
         camera.wait_recording(10)

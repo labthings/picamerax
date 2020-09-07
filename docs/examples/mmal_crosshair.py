@@ -1,4 +1,4 @@
-from picamera import mmal, mmalobj as mo, PiCameraPortDisabled
+from picamerax import mmal, mmalobj as mo, PiCameraPortDisabled
 from PIL import Image, ImageDraw
 from signal import pause
 

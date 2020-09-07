@@ -46,6 +46,6 @@ class Color(c0.Color):
     def __new__(cls, *args, **kwargs):
         warnings.warn(
             PiCameraDeprecated(
-                'The picamera.color module and Color class are deprecated; '
+                'The picamerax.color module and Color class are deprecated; '
                 'please use the colorzero library (same API) instead'))
         return c0.Color.__new__(cls, *args, **kwargs)

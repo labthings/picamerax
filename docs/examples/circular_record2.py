@@ -1,6 +1,6 @@
 import io
 import random
-import picamera
+import picamerax
 from PIL import Image
 
 prior_image = None
@@ -22,9 +22,9 @@ def detect_motion(camera):
         prior_image = current_image
         return result
 
-with picamera.PiCamera() as camera:
+with picamerax.PiCamera() as camera:
     camera.resolution = (1280, 720)
-    stream = picamera.PiCameraCircularIO(camera, seconds=10)
+    stream = picamerax.PiCameraCircularIO(camera, seconds=10)
     camera.start_recording(stream, format='h264')
     try:
         while True:

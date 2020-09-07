@@ -40,7 +40,7 @@ str = type('')
 import os
 import time
 import tempfile
-import picamera
+import picamerax
 import pytest
 from collections import namedtuple
 from verify import verify_video, verify_image, RAW_FORMATS
@@ -118,7 +118,7 @@ def test_record_to_file(camera, previewing, mode, filenames_format_options):
             camera.split_recording(filename2)
             camera.wait_recording(1)
         else:
-            with pytest.raises(picamera.PiCameraRuntimeError):
+            with pytest.raises(picamerax.PiCameraRuntimeError):
                 camera.split_recording(filename2)
     finally:
         camera.stop_recording()
@@ -148,7 +148,7 @@ def test_record_to_stream(camera, previewing, mode, format_options):
             camera.split_recording(stream2)
             camera.wait_recording(1)
         else:
-            with pytest.raises(picamera.PiCameraRuntimeError):
+            with pytest.raises(picamerax.PiCameraRuntimeError):
                 camera.split_recording(stream2)
     finally:
         camera.stop_recording()
@@ -185,7 +185,7 @@ def test_record_sequence_to_stream(camera, mode):
 def test_circular_record(camera, mode):
     resolution, framerate = mode
     expected_failures(resolution, 'h264', {})
-    stream = picamera.PiCameraCircularIO(camera, seconds=4)
+    stream = picamerax.PiCameraCircularIO(camera, seconds=4)
     camera.start_recording(stream, format='h264')
     try:
         # Keep recording until the stream is definitely full and starts
@@ -261,10 +261,10 @@ def test_macroblock_limit(camera):
     try:
         camera.resolution = '1080p'
         camera.framerate = 31
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             camera.start_recording(os.devnull, 'h264')
         camera.framerate_range = (15, 31)
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             camera.start_recording(os.devnull, 'h264')
     finally:
         camera.resolution = res
@@ -323,13 +323,13 @@ def test_motion_record(camera, mode):
 
 
 def test_record_bad_format(camera):
-    with pytest.raises(picamera.PiCameraValueError):
+    with pytest.raises(picamerax.PiCameraValueError):
         camera.start_recording('test.foo')
-    with pytest.raises(picamera.PiCameraValueError):
+    with pytest.raises(picamerax.PiCameraValueError):
         camera.start_recording('test.h264', format='foo')
-    with pytest.raises(picamera.PiCameraValueError):
+    with pytest.raises(picamerax.PiCameraValueError):
         camera.start_recording('test.mp4')
-    with pytest.raises(picamera.PiCameraValueError):
+    with pytest.raises(picamerax.PiCameraValueError):
         camera.start_recording('test.h264', format='mp4')
 
 

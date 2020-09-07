@@ -4,10 +4,10 @@
 Camera Hardware
 ===============
 
-.. currentmodule:: picamera
+.. currentmodule:: picamerax
 
 This chapter provides an overview of how the camera works under various
-conditions, as well as an introduction to the software interface that picamera
+conditions, as well as an introduction to the software interface that picamerax
 uses.
 
 .. _operations:
@@ -15,7 +15,7 @@ uses.
 Theory of Operation
 ===================
 
-Many questions I receive regarding picamera are based on misunderstandings of
+Many questions I receive regarding picamerax are based on misunderstandings of
 how the camera works. This chapter attempts to correct those misunderstandings
 and gives the reader a basic description of the operation of the camera. The
 chapter deliberately follows a `lie-to-children`_ model, presenting first a
@@ -57,7 +57,7 @@ but still numerous tasks are going on in the background (automatic gain
 control, exposure time, white balance, and several other tasks which we'll
 cover later on).
 
-This background processing is why most of the picamera example scripts seen in
+This background processing is why most of the picamerax example scripts seen in
 prior chapters include a ``sleep(2)`` line after initializing the camera. The
 ``sleep(2)`` statement pauses your script for a couple of seconds. During this
 pause, the camera's firmware continually receives rows of frames from the
@@ -338,7 +338,7 @@ of the minimum line read-out time).
     portion). Without the non-sensing pixels you would get different black
     levels at different ambient temperatures.
 
-The analog gain cannot be *directly* controlled in picamera, but various
+The analog gain cannot be *directly* controlled in picamerax, but various
 attributes can be used to "influence" it.
 
 * Setting :attr:`~PiCamera.exposure_mode` to ``'off'`` locks the analog (and
@@ -410,7 +410,7 @@ real-time OS (VCOS).
 
 The following diagram illustrates that the BCM2835 `system on a chip`_ (SoC) is
 comprised of an ARM Cortex CPU running Linux (under which is running
-``myscript.py`` which is using picamera), and a VideoCore IV GPU running VCOS.
+``myscript.py`` which is using picamerax), and a VideoCore IV GPU running VCOS.
 The VideoCore Host Interface (VCHI) is a message passing system provided to
 permit communication between these two components. The available RAM is split
 between the two components (128Mb is a typical GPU memory split when using the
@@ -427,9 +427,9 @@ The scenario depicted is as follows:
    part in the next section).
 
 3. Meanwhile, over on the CPU, ``myscript.py`` makes a ``capture`` call using
-   picamera.
+   picamerax.
 
-4. The picamera library in turn uses the MMAL API to enact this request
+4. The picamerax library in turn uses the MMAL API to enact this request
    (actually there's quite a lot of MMAL calls that go on here but for the sake
    of simplicity we represent all this with a single arrow).
 
@@ -442,11 +442,11 @@ The scenario depicted is as follows:
 7. Finally, the GPU sends a message back over VCHI that the capture is
    complete.
 
-8. This causes an MMAL thread to fire a callback in the picamera library, which
+8. This causes an MMAL thread to fire a callback in the picamerax library, which
    in turn retrieves the frame (in reality, this requires more MMAL and VCHI
    activity).
 
-9. Finally, picamera calls ``write`` on the output object provided by
+9. Finally, picamerax calls ``write`` on the output object provided by
    ``myscript.py``.
 
 .. image:: images/camera_architecture.*
@@ -828,7 +828,7 @@ image and video processing:
   ``/boot/config.txt``.
 
 * The maximum resolution of the V2 camera can also cause issues with previews.
-  Currently, picamera runs previews at the same resolution as captures
+  Currently, picamerax runs previews at the same resolution as captures
   (equivalent to ``-fp`` in ``raspistill``). To achieve full resolution operation with
   the V2 camera module, you may need to increase
   ``gpu_mem`` in ``/boot/config.txt``, or configure the preview to use a lower
@@ -841,8 +841,8 @@ image and video processing:
 * The maximum exposure time is currently 6 seconds on the V1 camera
   module, and 10 seconds on the V2 camera module. Remember that exposure
   time is limited by framerate, so you need to set an extremely slow
-  :attr:`~picamera.PiCamera.framerate` before setting
-  :attr:`~picamera.PiCamera.shutter_speed`.
+  :attr:`~picamerax.PiCamera.framerate` before setting
+  :attr:`~picamerax.PiCamera.shutter_speed`.
 
 
 .. _mmal:
@@ -850,10 +850,10 @@ image and video processing:
 MMAL
 ====
 
-The MMAL layer below picamera provides a greatly simplified interface to the
+The MMAL layer below picamerax provides a greatly simplified interface to the
 camera firmware running on the GPU. Conceptually, it presents the camera with
 three "ports": the **still port**, the **video port**, and the **preview port**. The
-following sections describe how these ports are used by picamera and how they
+following sections describe how these ports are used by picamerax and how they
 influence the camera's behaviour.
 
 The Still Port
@@ -894,7 +894,7 @@ sink is destroyed and the preview port is connected to an instance of
 Pipelines
 ---------
 
-This section provides some detail about the MMAL pipelines picamera
+This section provides some detail about the MMAL pipelines picamerax
 constructs in response to various method calls.
 
 The firmware provides various encoders which can be attached to the still and
@@ -914,7 +914,7 @@ these states:
 As you have probably noticed in the diagram above, the video port is a little
 more complex. In order to permit simultaneous video recording and image capture
 via the video port, a "splitter" component is permanently connected to the
-video port by picamera, and encoders are in turn attached to one of its four
+video port by picamerax, and encoders are in turn attached to one of its four
 output ports (numbered 0, 1, 2, and 3). Hence, when recording video the
 camera's setup looks like this:
 
@@ -945,13 +945,13 @@ the requested encodings.
 
 For example, in older firmwares the camera's still port cannot be configured
 for RGB output (due to a faulty buffer size check), but they can be
-configured for YUV output. So in this case, picamera configures the still port
+configured for YUV output. So in this case, picamerax configures the still port
 for YUV output, attaches a resizer (configured with the same input and output
 resolution), then configures the resizer's output for RGBA (the resizer doesn't
 support RGB for some reason). It then runs the capture and strips the redundant
 alpha bytes off the data.
 
-Recent firmwares fix the buffer size check, so with these picamera will
+Recent firmwares fix the buffer size check, so with these picamerax will
 simply configure the still port for RGB output (since 1.11):
 
 .. image:: images/still_raw_capture.*
@@ -992,18 +992,18 @@ MMAL framework). However, not all OPAQUE encodings are equivalent:
   single image OPAQUE input, or YUV. In later firmwares it also
   supports RGB or BGR output.
 
-* The VPU resizer (:class:`~picamera.mmalobj.MMALResizer`) theoretically
+* The VPU resizer (:class:`~picamerax.mmalobj.MMALResizer`) theoretically
   accepts OPAQUE input (though the author hasn't managed to get this working at
   the time of writing) but will only produce YUV, RGBA, and BGRA output, not
   RGB or BGR.
 
-* The ISP resizer (:class:`~picamera.mmalobj.MMALISPResizer`, not currently
-  used by picamera's high level API, but available from the
-  :mod:`~picamera.mmalobj` layer) accepts OPAQUE input, and will produce almost
+* The ISP resizer (:class:`~picamerax.mmalobj.MMALISPResizer`, not currently
+  used by picamerax's high level API, but available from the
+  :mod:`~picamerax.mmalobj` layer) accepts OPAQUE input, and will produce almost
   any unencoded output, including YUV, RGB, BGR, RGBA, and BGRA, but not
   OPAQUE.
 
-The :mod:`~picamera.mmalobj` layer, introduced in picamera 1.11, is aware of
+The :mod:`~picamerax.mmalobj` layer, introduced in picamerax 1.11, is aware of
 these OPAQUE encoding differences and attempts to configure connections between
 components using the most efficient formats possible. However, it is not aware
 of firmware revisions, so if you're playing with MMAL components via this layer
@@ -1012,11 +1012,11 @@ be prepared to do some tinkering to get your pipeline working.
 Please note that the description above is MMAL's greatly simplified
 presentation of the imaging pipeline. This is far removed from what actually
 happens at the GPU's ISP level (described roughly in earlier sections - link).
-However, as MMAL is the API under-pinning the picamera library (along with the
+However, as MMAL is the API under-pinning the picamerax library (along with the
 official ``raspistill`` and ``raspivid`` applications) it is worth
 understanding.
 
-In other words, by using picamera you are passing through at least two
+In other words, by using picamerax you are passing through at least two
 abstraction layers, which necessarily obscure (but hopefully simplify) the
 "true" operation of the camera.
 

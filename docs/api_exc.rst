@@ -4,13 +4,13 @@
 API - Exceptions
 ================
 
-.. currentmodule:: picamera
+.. currentmodule:: picamerax
 
-All exceptions defined by picamera are listed in this section. All exception
+All exceptions defined by picamerax are listed in this section. All exception
 classes utilize multiple inheritance in order to make testing for exception
 types more intuitive. For example, :exc:`PiCameraValueError` derives from both
 :exc:`PiCameraError` and :exc:`ValueError`. Hence it will be caught by blocks
-intended to catch any error specific to the picamera library::
+intended to catch any error specific to the picamerax library::
 
     try:
         camera.brightness = int(some_user_value)

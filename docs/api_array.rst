@@ -4,18 +4,18 @@
 API - Arrays
 ============
 
-.. module:: picamera.array
+.. module:: picamerax.array
 
-.. currentmodule:: picamera.array
+.. currentmodule:: picamerax.array
 
-The picamera library provides a set of classes designed to aid in construction
+The picamerax library provides a set of classes designed to aid in construction
 of n-dimensional `numpy`_ arrays from camera output. In order to avoid adding a
-hard dependency on numpy to picamera, this module (:mod:`picamera.array`) is
-not automatically imported by the main picamera package and must be explicitly
+hard dependency on numpy to picamerax, this module (:mod:`picamerax.array`) is
+not automatically imported by the main picamerax package and must be explicitly
 imported, e.g.::
 
-    import picamera
-    import picamera.array
+    import picamerax
+    import picamerax.array
 
 .. _numpy: http://www.numpy.org/
 

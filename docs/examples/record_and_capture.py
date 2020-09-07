@@ -1,6 +1,6 @@
-import picamera
+import picamerax
 
-with picamera.PiCamera() as camera:
+with picamerax.PiCamera() as camera:
     camera.resolution = (800, 600)
     camera.start_preview()
     camera.start_recording('foo.h264')

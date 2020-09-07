@@ -23,10 +23,10 @@ Links
 
 
 .. _Raspberry Pi: https://www.raspberrypi.org/
-.. _camera: https://www.raspberrypi.org/learning/getting-started-with-picamera/
-.. _PyPI: https://pypi.python.org/pypi/picamera/
-.. _documentation: https://picamera.readthedocs.io/
-.. _source code: https://github.com/waveform80/picamera
-.. _bug tracker: https://github.com/waveform80/picamera/issues
+.. _camera: https://www.raspberrypi.org/learning/getting-started-with-picamerax/
+.. _PyPI: https://pypi.python.org/pypi/picamerax/
+.. _documentation: https://picamerax.readthedocs.io/
+.. _source code: https://github.com/waveform80/picamerax
+.. _bug tracker: https://github.com/waveform80/picamerax/issues
 .. _BSD license: https://opensource.org/licenses/BSD-3-Clause
 

@@ -4,10 +4,10 @@
 API - Encoders
 ==============
 
-.. currentmodule:: picamera
+.. currentmodule:: picamerax
 
 Encoders are typically used by the camera to compress captured images or video
-frames for output to disk. However, picamera also has classes representing
+frames for output to disk. However, picamerax also has classes representing
 "unencoded" output (raw RGB, etc). Most users will have no direct need to use
 these classes directly, but advanced users may find them useful as base classes
 for :ref:`custom_encoders`.
@@ -15,7 +15,7 @@ for :ref:`custom_encoders`.
 .. note::
 
     It is strongly recommended that you familiarize yourself with the
-    :mod:`~picamera.mmalobj` layer before attempting to understand the encoder
+    :mod:`~picamerax.mmalobj` layer before attempting to understand the encoder
     classes as they deal with several concepts native to that layer.
 
 The inheritance diagram for the following classes is displayed below:

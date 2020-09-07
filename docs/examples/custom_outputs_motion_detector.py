@@ -1,6 +1,6 @@
 from __future__ import division
 
-import picamera
+import picamerax
 import numpy as np
 
 motion_dtype = np.dtype([
@@ -32,7 +32,7 @@ class MyMotionDetector(object):
         # Pretend we wrote all the bytes of s
         return len(s)
 
-with picamera.PiCamera() as camera:
+with picamerax.PiCamera() as camera:
     camera.resolution = (640, 480)
     camera.framerate = 30
     camera.start_recording(

@@ -747,7 +747,7 @@ class PiCamera(object):
         """
         Determine the camera and output ports for given capture options.
 
-        See :ref:`camera_hardware` for more information on picamera's usage of
+        See :ref:`camera_hardware` for more information on picamerax's usage of
         camera, splitter, and encoder ports. The general idea here is that the
         capture (still) port operates on its own, while the video port is
         always connected to a splitter component, so requests for a video port
@@ -1421,8 +1421,8 @@ class PiCamera(object):
         output to a series of H.264 files named clip01.h264, clip02.h264, and
         clip03.h264 one could use the following::
 
-            import picamera
-            with picamera.PiCamera() as camera:
+            import picamerax
+            with picamerax.PiCamera() as camera:
                 for filename in camera.record_sequence([
                         'clip01.h264',
                         'clip02.h264',
@@ -1434,8 +1434,8 @@ class PiCamera(object):
         (which is easier to expand to a large number of output files) is by
         using a generator expression as the input sequence::
 
-            import picamera
-            with picamera.PiCamera() as camera:
+            import picamerax
+            with picamerax.PiCamera() as camera:
                 for filename in camera.record_sequence(
                         'clip%02d.h264' % i for i in range(3)):
                     print('Recording to %s' % filename)
@@ -1450,8 +1450,8 @@ class PiCamera(object):
 
             import io
             import itertools
-            import picamera
-            with picamera.PiCamera() as camera:
+            import picamerax
+            with picamerax.PiCamera() as camera:
                 analyse = None
                 for stream in camera.record_sequence(
                         itertools.cycle((io.BytesIO(), io.BytesIO()))):
@@ -1656,8 +1656,8 @@ class PiCamera(object):
         For example, to capture 3 consecutive images::
 
             import time
-            import picamera
-            with picamera.PiCamera() as camera:
+            import picamerax
+            with picamerax.PiCamera() as camera:
                 camera.start_preview()
                 time.sleep(2)
                 camera.capture_sequence([
@@ -1672,8 +1672,8 @@ class PiCamera(object):
         to use::
 
             import time
-            import picamera
-            with picamera.PiCamera() as camera:
+            import picamerax
+            with picamerax.PiCamera() as camera:
                 camera.start_preview()
                 time.sleep(2)
                 camera.capture_sequence([
@@ -1811,8 +1811,8 @@ class PiCamera(object):
         image02.jpg, etc. one could do the following::
 
             import time
-            import picamera
-            with picamera.PiCamera() as camera:
+            import picamerax
+            with picamerax.PiCamera() as camera:
                 camera.start_preview()
                 try:
                     for i, filename in enumerate(
@@ -1830,8 +1830,8 @@ class PiCamera(object):
 
             import io
             import time
-            import picamera
-            with picamera.PiCamera() as camera:
+            import picamerax
+            with picamerax.PiCamera() as camera:
                 stream = io.BytesIO()
                 for foo in camera.capture_continuous(stream, format='jpeg'):
                     # Truncate the stream to the current position (in case
@@ -3316,7 +3316,7 @@ class PiCamera(object):
             than 800 (specifically up to 1600) can be achieved in certain
             conditions with :attr:`exposure_mode` set to ``'sports'`` and
             :attr:`iso` set to 0.  It doesn't appear to be possible to manually
-            request an ISO setting higher than 800, but the picamera library
+            request an ISO setting higher than 800, but the picamerax library
             will permit settings up to 1600 in case the underlying firmware
             permits such settings in particular circumstances.
 
@@ -3993,9 +3993,9 @@ class PiCamera(object):
         attributes of the :class:`PiRenderer` class to configure the appearance
         of the preview. For example, to make the preview semi-transparent::
 
-            import picamera
+            import picamerax
 
-            with picamera.PiCamera() as camera:
+            with picamerax.PiCamera() as camera:
                 camera.start_preview()
                 camera.preview.alpha = 128
 
@@ -4253,7 +4253,7 @@ class PiCamera(object):
             this attribute, you may choose to construct the
             :class:`Color` instance as follows::
 
-                camera.annotate_foreground = picamera.Color(y=0.2, u=0, v=0)
+                camera.annotate_foreground = picamerax.Color(y=0.2, u=0, v=0)
 
         .. _Y'UV: https://en.wikipedia.org/wiki/YUV
 

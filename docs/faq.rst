@@ -4,14 +4,14 @@
 Frequently Asked Questions (FAQ)
 ================================
 
-.. currentmodule:: picamera
+.. currentmodule:: picamerax
 
 
 AttributeError: 'module' object has no attribute 'PiCamera'
 ===========================================================
 
-You've named your script ``picamera.py`` (or you've named some other script
-``picamera.py``. If you name a script after a system or third-party package you
+You've named your script ``picamerax.py`` (or you've named some other script
+``picamerax.py``. If you name a script after a system or third-party package you
 will break imports for that system or third-party package. Delete or rename
 that script (and any associated ``.pyc`` files), and try again.
 
@@ -70,10 +70,10 @@ the instance when the camera is not required in order to conserve power. For
 example, the following code captures 60 images over an hour, but leaves the
 camera running all the time::
 
-    import picamera
+    import picamerax
     import time
 
-    with picamera.PiCamera() as camera:
+    with picamerax.PiCamera() as camera:
         camera.resolution = (1280, 720)
         time.sleep(1) # Camera warm-up time
         for i, filename in enumerate(camera.capture_continuous('image{counter:02d}.jpg')):
@@ -86,11 +86,11 @@ camera running all the time::
 By contrast, this code closes the camera between shots (but can't use the
 convenient :meth:`~PiCamera.capture_continuous` method as a result)::
 
-    import picamera
+    import picamerax
     import time
 
     for i in range(60):
-        with picamera.PiCamera() as camera:
+        with picamerax.PiCamera() as camera:
             camera.resolution = (1280, 720)
             time.sleep(1) # Camera warm-up time
             filename = 'image%02d.jpg' % i
@@ -116,28 +116,28 @@ How can I take two consecutive pictures with equivalent settings?
 
 See the :ref:`consistent_capture` recipe.
 
-Can I use picamera with a USB webcam?
+Can I use picamerax with a USB webcam?
 =====================================
 
-No. The picamera library relies on libmmal which is specific to the Pi's camera
+No. The picamerax library relies on libmmal which is specific to the Pi's camera
 module.
 
-How can I tell what version of picamera I have installed?
+How can I tell what version of picamerax I have installed?
 =========================================================
 
-The picamera library relies on the setuptools package for installation
+The picamerax library relies on the setuptools package for installation
 services.  You can use the setuptools ``pkg_resources`` API to query which
-version of picamera is available in your Python environment like so::
+version of picamerax is available in your Python environment like so::
 
     >>> from pkg_resources import require
-    >>> require('picamera')
-    [picamera 1.2 (/usr/local/lib/python2.7/dist-packages)]
-    >>> require('picamera')[0].version
+    >>> require('picamerax')
+    [picamerax 1.2 (/usr/local/lib/python2.7/dist-packages)]
+    >>> require('picamerax')[0].version
     '1.2'
 
 If you have multiple versions installed (e.g. from ``pip`` and ``apt-get``)
 they will not show up in the list returned by the ``require`` method. However,
-the first entry in the list will be the version that ``import picamera`` will
+the first entry in the list will be the version that ``import picamerax`` will
 import.
 
 If you receive the error "No module named pkg_resources", you need to install
@@ -151,15 +151,15 @@ How come I can't upgrade to the latest version?
 ===============================================
 
 If you are using Raspbian, firstly check that you haven't got both a PyPI
-(``pip``) and an apt (``apt-get``) installation of picamera installed
+(``pip``) and an apt (``apt-get``) installation of picamerax installed
 simultaneously. If you have, one will be taking precedence and it may not be
 the most up to date version.
 
 Secondly, please understand that while the PyPI release process is entirely
-automated (so as soon as a new picamera release is announced, it will be
+automated (so as soon as a new picamerax release is announced, it will be
 available on PyPI), the release process for Raspbian packages is semi-manual.
 There is typically a delay of a few days after a release before updated
-picamera packages become accessible in the Raspbian repository.
+picamerax packages become accessible in the Raspbian repository.
 
 Users desperate to try the latest version may choose to uninstall their ``apt``
 based copy (uninstall instructions are provided in the :ref:`installation
@@ -298,7 +298,7 @@ Use the new :attr:`~PiPreviewRenderer.resolution` property to select a lower
 resolution for the preview, or specify one when starting the preview. For
 example::
 
-    from picamera import PiCamera
+    from picamerax import PiCamera
 
     camera = PiCamera()
     camera.resolution = camera.MAX_RESOLUTION
@@ -313,7 +313,7 @@ in a variety of ways (from simple errors to the process locking up).
 
 Python's :mod:`multiprocessing` module creates multiple copies of a Python
 process (usually via :func:`os.fork`) for the purpose of parallel processing.
-Whilst you can use :mod:`multiprocessing` with picamera, you must ensure that
+Whilst you can use :mod:`multiprocessing` with picamerax, you must ensure that
 only a *single* process creates a :class:`PiCamera` instance at any given time.
 
 The following script demonstrates an approach with one process that owns the

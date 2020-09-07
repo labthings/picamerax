@@ -1,5 +1,5 @@
 from time import sleep
-from picamera import PiCamera
+from picamerax import PiCamera
 
 camera = PiCamera(resolution=(1280, 720), framerate=30)
 # Set ISO to the desired value

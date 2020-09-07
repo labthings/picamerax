@@ -1,6 +1,6 @@
-import picamera
+import picamerax
 
-with picamera.PiCamera() as camera:
+with picamerax.PiCamera() as camera:
     camera.resolution = (640, 480)
     camera.framerate = 30
     camera.start_recording('motion.h264', motion_output='motion.data')

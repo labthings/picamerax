@@ -38,7 +38,7 @@ from __future__ import (
 str = type('')
 
 
-import picamera.mmal as mmal
+import picamerax.mmal as mmal
 
 
 class PiCameraWarning(Warning):
@@ -49,31 +49,31 @@ class PiCameraWarning(Warning):
 
 class PiCameraDeprecated(PiCameraWarning, DeprecationWarning):
     """
-    Raised when deprecated functionality in picamera is used.
+    Raised when deprecated functionality in picamerax is used.
     """
 
 
 class PiCameraFallback(PiCameraWarning, RuntimeWarning):
     """
-    Raised when picamera has to fallback on old functionality.
+    Raised when picamerax has to fallback on old functionality.
     """
 
 
 class PiCameraResizerEncoding(PiCameraWarning, RuntimeWarning):
     """
-    Raised when picamera uses a resizer purely for encoding purposes.
+    Raised when picamerax uses a resizer purely for encoding purposes.
     """
 
 
 class PiCameraAlphaStripping(PiCameraWarning, RuntimeWarning):
     """
-    Raised when picamera does alpha-byte stripping.
+    Raised when picamerax does alpha-byte stripping.
     """
 
 
 class PiCameraResolutionRounded(PiCameraWarning, RuntimeWarning):
     """
-    Raised when picamera has to round a requested frame size upward.
+    Raised when picamerax has to round a requested frame size upward.
     """
 
 

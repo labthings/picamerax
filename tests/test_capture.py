@@ -40,7 +40,7 @@ str = type('')
 import io
 import os
 import tempfile
-import picamera
+import picamerax
 import pytest
 from PIL import Image
 from collections import namedtuple
@@ -235,19 +235,19 @@ def test_exif_binary(camera, mode):
     assert exif[37510] == b'UNICODE\x00\xff\xfeF\x00o\x00o\x00'
 
 def test_capture_bad_format(camera):
-    with pytest.raises(picamera.PiCameraValueError):
+    with pytest.raises(picamerax.PiCameraValueError):
         camera.capture('test.foo')
-    with pytest.raises(picamera.PiCameraValueError):
+    with pytest.raises(picamerax.PiCameraValueError):
         camera.capture('test.jpg', format='foo')
-    with pytest.raises(picamera.PiCameraValueError):
+    with pytest.raises(picamerax.PiCameraValueError):
         camera.capture('test.tiff')
-    with pytest.raises(picamera.PiCameraValueError):
+    with pytest.raises(picamerax.PiCameraValueError):
         camera.capture('test.jpg', format='tiff')
 
 def test_capture_bad_burst(camera):
-    with pytest.raises(picamera.PiCameraValueError):
+    with pytest.raises(picamerax.PiCameraValueError):
         camera.capture_sequence(['test.jpg'], use_video_port=True, burst=True)
-    with pytest.raises(picamera.PiCameraValueError):
+    with pytest.raises(picamerax.PiCameraValueError):
         camera.capture('test.jpg', use_video_port=True, burst=True)
 
 def test_capture_bytes_filename(camera, tmpdir):

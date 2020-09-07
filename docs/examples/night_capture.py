@@ -1,4 +1,4 @@
-from picamera import PiCamera
+from picamerax import PiCamera
 from time import sleep
 from fractions import Fraction
 

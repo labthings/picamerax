@@ -28,20 +28,20 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 """
-The picamera package consists of several modules which provide a pure Python
+The picamerax package consists of several modules which provide a pure Python
 interface to the Raspberry Pi's camera module. The package is only intended to
 run on a Raspberry Pi, and expects to be able to load the MMAL library
 (libmmal.so) upon import.
 
 The classes defined by most modules in this package are available directly from
-the :mod:`picamera` namespace. In other words, the following code is typically
+the :mod:`picamerax` namespace. In other words, the following code is typically
 all that is required to access classes in the package::
 
-    import picamera
+    import picamerax
 
-The :mod:`picamera.array` module is an exception to this as it depends on the
+The :mod:`picamerax.array` module is an exception to this as it depends on the
 third-party `numpy`_ package (this avoids making numpy a mandatory dependency
-for picamera).
+for picamerax).
 
 .. _numpy: http://www.numpy.org/
 
@@ -49,14 +49,14 @@ for picamera).
 The following sections document the various modules available within the
 package:
 
-* :mod:`picamera.camera`
-* :mod:`picamera.encoders`
-* :mod:`picamera.frames`
-* :mod:`picamera.streams`
-* :mod:`picamera.renderers`
-* :mod:`picamera.color`
-* :mod:`picamera.exc`
-* :mod:`picamera.array`
+* :mod:`picamerax.camera`
+* :mod:`picamerax.encoders`
+* :mod:`picamerax.frames`
+* :mod:`picamerax.streams`
+* :mod:`picamerax.renderers`
+* :mod:`picamerax.color`
+* :mod:`picamerax.exc`
+* :mod:`picamerax.array`
 """
 
 from __future__ import (
@@ -69,7 +69,7 @@ from __future__ import (
 # Make Py2's str equivalent to Py3's
 str = type('')
 
-from picamera.exc import (
+from picamerax.exc import (
     PiCameraWarning,
     PiCameraDeprecated,
     PiCameraFallback,
@@ -85,11 +85,11 @@ from picamera.exc import (
     PiCameraPortDisabled,
     mmal_check,
     )
-from picamera.mmalobj import PiResolution, PiFramerateRange, PiSensorMode
-from picamera.camera import PiCamera
-from picamera.display import PiDisplay
-from picamera.frames import PiVideoFrame, PiVideoFrameType
-from picamera.encoders import (
+from picamerax.mmalobj import PiResolution, PiFramerateRange, PiSensorMode
+from picamerax.camera import PiCamera
+from picamerax.display import PiDisplay
+from picamerax.frames import PiVideoFrame, PiVideoFrameType
+from picamerax.encoders import (
     PiEncoder,
     PiVideoEncoder,
     PiImageEncoder,
@@ -104,11 +104,11 @@ from picamera.encoders import (
     PiCookedMultiImageEncoder,
     PiRawMultiImageEncoder,
     )
-from picamera.renderers import (
+from picamerax.renderers import (
     PiRenderer,
     PiOverlayRenderer,
     PiPreviewRenderer,
     PiNullSink,
     )
-from picamera.streams import PiCameraCircularIO, CircularIO, BufferIO
-from picamera.color import Color, Red, Green, Blue, Hue, Lightness, Saturation
+from picamerax.streams import PiCameraCircularIO, CircularIO, BufferIO
+from picamerax.color import Color, Red, Green, Blue, Hue, Lightness, Saturation

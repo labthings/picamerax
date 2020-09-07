@@ -37,10 +37,10 @@ from __future__ import (
 # Make Py2's str equivalent to Py3's
 str = type('')
 
-import picamera
+import picamerax
 import pytest
 
 def test_dual_camera(camera):
-    with pytest.raises(picamera.PiCameraError):
-        another_camera = picamera.PiCamera()
+    with pytest.raises(picamerax.PiCameraError):
+        another_camera = picamerax.PiCamera()
 

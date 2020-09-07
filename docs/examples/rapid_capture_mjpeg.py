@@ -1,6 +1,6 @@
 import io
 import time
-import picamera
+import picamerax
 
 class SplitFrames(object):
     def __init__(self):
@@ -17,7 +17,7 @@ class SplitFrames(object):
             self.output = io.open('image%02d.jpg' % self.frame_num, 'wb')
         self.output.write(buf)
 
-with picamera.PiCamera(resolution='720p', framerate=30) as camera:
+with picamerax.PiCamera(resolution='720p', framerate=30) as camera:
     camera.start_preview()
     # Give the camera some warm-up time
     time.sleep(2)

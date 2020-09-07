@@ -39,8 +39,8 @@ str = type('')
 
 import warnings
 
-from picamera import mmal, PiCamera
-from picamera.exc import mmal_check, PiCameraError, PiCameraDeprecated
+from picamerax import mmal, PiCamera
+from picamerax.exc import mmal_check, PiCameraError, PiCameraDeprecated
 import pytest
 
 def test_mmal_check():

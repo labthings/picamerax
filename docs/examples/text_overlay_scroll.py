@@ -1,10 +1,10 @@
-import picamera
+import picamerax
 import time
 import itertools
 
 s = "This message would be far too long to display normally..."
 
-camera = picamera.PiCamera()
+camera = picamerax.PiCamera()
 camera.resolution = (640, 480)
 camera.framerate = 24
 camera.start_preview()
