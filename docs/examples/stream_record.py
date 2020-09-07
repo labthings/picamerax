@@ -1,5 +1,5 @@
 from io import BytesIO
-from picamera import PiCamera
+from picamerax import PiCamera
 
 stream = BytesIO()
 camera = PiCamera()

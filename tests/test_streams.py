@@ -51,8 +51,8 @@ except ImportError:
             yield total
 
 import pytest
-from picamera.encoders import PiVideoFrame, PiVideoFrameType
-from picamera.streams import CircularIO, PiCameraCircularIO
+from picamerax.encoders import PiVideoFrame, PiVideoFrameType
+from picamerax.streams import CircularIO, PiCameraCircularIO
 
 
 def test_init():

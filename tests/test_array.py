@@ -38,10 +38,10 @@ from __future__ import (
 str = type('')
 
 import numpy as np
-import picamera
-import picamera.array
-import picamera.bcm_host as bcm_host
-import picamera.mmal as mmal
+import picamerax
+import picamerax.array
+import picamerax.bcm_host as bcm_host
+import picamerax.mmal as mmal
 import pytest
 import mock
 
@@ -55,13 +55,13 @@ def fake_cam(request):
 
 def test_rgb_array1(camera, mode):
     resolution, framerate = mode
-    with picamera.array.PiRGBArray(camera) as stream:
+    with picamerax.array.PiRGBArray(camera) as stream:
         camera.capture(stream, 'rgb')
         assert stream.array.dtype == np.uint8
         assert stream.array.shape == (resolution[1], resolution[0], 3)
 
 def test_rgb_array2(fake_cam):
-    with picamera.array.PiRGBArray(fake_cam) as stream:
+    with picamerax.array.PiRGBArray(fake_cam) as stream:
         stream.write(b'\x01\x02\x03' * 256)
         stream.write(b'\x01\x02\x03' * 256)
         stream.flush()
@@ -69,14 +69,14 @@ def test_rgb_array2(fake_cam):
         assert (stream.array[:, :, 1] == 2).all()
         assert (stream.array[:, :, 2] == 3).all()
         stream.truncate(0)
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             stream.write(b'\x00' * 10)
             stream.flush()
 
 def test_rgb_array3(camera, mode):
     resolution, framerate = mode
     resize = (resolution[0] // 2, resolution[1] // 2)
-    with picamera.array.PiRGBArray(camera, size=resize) as stream:
+    with picamerax.array.PiRGBArray(camera, size=resize) as stream:
         camera.capture(stream, 'rgb', resize=resize)
         assert stream.array.dtype == np.uint8
         assert stream.array.shape == (resize[1], resize[0], 3)
@@ -85,7 +85,7 @@ def test_yuv_array1(camera, mode):
     resolution, framerate = mode
     if resolution == (2592, 1944):
         pytest.xfail('Pi runs out of memory during RGB conversion at this resolution')
-    with picamera.array.PiYUVArray(camera) as stream:
+    with picamerax.array.PiYUVArray(camera) as stream:
         camera.capture(stream, 'yuv')
         assert stream.array.dtype == np.uint8
         assert stream.array.shape == (resolution[1], resolution[0], 3)
@@ -93,7 +93,7 @@ def test_yuv_array1(camera, mode):
         assert stream.rgb_array.shape == (resolution[1], resolution[0], 3)
 
 def test_yuv_array2(fake_cam):
-    with picamera.array.PiYUVArray(fake_cam) as stream:
+    with picamerax.array.PiYUVArray(fake_cam) as stream:
         stream.write(b'\x01' * 32 * 16)
         stream.write(b'\x02' * 16 * 8)
         stream.write(b'\x03' * 16 * 8)
@@ -103,14 +103,14 @@ def test_yuv_array2(fake_cam):
         assert (stream.array[:, :, 2] == 3).all()
         # XXX What about rgb_array?
         stream.truncate(0)
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             stream.write(b'\x00' * 10)
             stream.flush()
 
 def test_yuv_array3(camera, mode):
     resolution, framerate = mode
     resize = (resolution[0] // 2, resolution[1] // 2)
-    with picamera.array.PiYUVArray(camera, size=resize) as stream:
+    with picamerax.array.PiYUVArray(camera, size=resize) as stream:
         camera.capture(stream, 'yuv', resize=resize)
         assert stream.array.dtype == np.uint8
         assert stream.array.shape == (resize[1], resize[0], 3)
@@ -134,7 +134,7 @@ def test_rgb_buffer(camera, mode):
     camera.capture(buf, 'rgb')
 
 def test_bayer_array(camera, mode):
-    with picamera.array.PiBayerArray(camera) as stream:
+    with picamerax.array.PiBayerArray(camera) as stream:
         camera.capture(stream, 'jpeg', bayer=True)
         # Bayer data is always full res
         if camera.exif_tags['IFD0.Model'].upper() == 'RP_OV5647':
@@ -153,7 +153,7 @@ def test_motion_array1(camera, mode):
         pytest.xfail('Cannot encode video at max resolution')
     elif framerate == 5 and camera.exif_tags['IFD0.Model'].upper() == 'RP_IMX219':
         pytest.xfail('Motion vectors fail at low framerate on V2 camera module')
-    with picamera.array.PiMotionArray(camera) as stream:
+    with picamerax.array.PiMotionArray(camera) as stream:
         camera.start_recording('/dev/null', 'h264', motion_output=stream)
         camera.wait_recording(1)
         camera.stop_recording()
@@ -173,7 +173,7 @@ def test_motion_array2(camera, mode):
         resize = (640, 480)
     else:
         resize = (resolution[0] // 2, resolution[1] // 2)
-    with picamera.array.PiMotionArray(camera, size=resize) as stream:
+    with picamerax.array.PiMotionArray(camera, size=resize) as stream:
         camera.start_recording(
             '/dev/null', 'h264', motion_output=stream, resize=resize)
         camera.wait_recording(1)
@@ -190,7 +190,7 @@ def test_yuv_analysis1(camera, mode):
     resolution, framerate = mode
     if resolution == (2592, 1944):
         pytest.xfail('Cannot encode video at max resolution')
-    class YUVTest(picamera.array.PiYUVAnalysis):
+    class YUVTest(picamerax.array.PiYUVAnalysis):
         def __init__(self, camera):
             super(YUVTest, self).__init__(camera)
             self.write_called = False
@@ -199,26 +199,26 @@ def test_yuv_analysis1(camera, mode):
             assert a.shape == (resolution[1], resolution[0], 3)
     with YUVTest(camera) as stream:
         camera.start_recording(stream, 'yuv')
-        camera.wait_recording(1)
+        camera.wait_recording(2)
         camera.stop_recording()
         assert stream.write_called
 
 def test_yuv_analysis2(fake_cam):
-    class YUVTest(picamera.array.PiYUVAnalysis):
+    class YUVTest(picamerax.array.PiYUVAnalysis):
         def analyze(self, a):
             assert (a[..., 0] == 1).all()
             assert (a[..., 1] == 2).all()
             assert (a[..., 2] == 3).all()
     with YUVTest(fake_cam) as stream:
         stream.write((b'\x01' * 32 * 16) + (b'\x02' * 16 * 8) + (b'\x03' * 16 * 8))
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             stream.write(b'\x00' * 10)
 
 def test_rgb_analysis1(camera, mode):
     resolution, framerate = mode
     if resolution == (2592, 1944):
         pytest.xfail('Cannot encode video at max resolution')
-    class RGBTest(picamera.array.PiRGBAnalysis):
+    class RGBTest(picamerax.array.PiRGBAnalysis):
         def __init__(self, camera):
             super(RGBTest, self).__init__(camera)
             self.write_called = False
@@ -227,19 +227,19 @@ def test_rgb_analysis1(camera, mode):
             assert a.shape == (resolution[1], resolution[0], 3)
     with RGBTest(camera) as stream:
         camera.start_recording(stream, 'rgb')
-        camera.wait_recording(1)
+        camera.wait_recording(2)
         camera.stop_recording()
         assert stream.write_called
 
 def test_rgb_analysis2(fake_cam):
-    class RGBTest(picamera.array.PiRGBAnalysis):
+    class RGBTest(picamerax.array.PiRGBAnalysis):
         def analyze(self, a):
             assert (a[..., 0] == 1).all()
             assert (a[..., 1] == 2).all()
             assert (a[..., 2] == 3).all()
     with RGBTest(fake_cam) as stream:
         stream.write(b'\x01\x02\x03' * 512)
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             stream.write(b'\x00' * 10)
 
 def test_motion_analysis1(camera, mode):
@@ -248,7 +248,7 @@ def test_motion_analysis1(camera, mode):
         pytest.xfail('Cannot encode video at max resolution')
     width = ((resolution[0] + 15) // 16) + 1
     height = (resolution[1] + 15) // 16
-    class MATest(picamera.array.PiMotionAnalysis):
+    class MATest(picamerax.array.PiMotionAnalysis):
         def __init__(self, camera):
             super(MATest, self).__init__(camera)
             self.write_called = False
@@ -257,7 +257,7 @@ def test_motion_analysis1(camera, mode):
             assert a.shape == (height, width)
     with MATest(camera) as stream:
         camera.start_recording('/dev/null', 'h264', motion_output=stream)
-        camera.wait_recording(1)
+        camera.wait_recording(2)
         camera.stop_recording()
         assert stream.write_called
 
@@ -269,7 +269,7 @@ def test_motion_analysis2(camera, mode):
         resize = (resolution[0] // 2, resolution[1] // 2)
     width = ((resize[0] + 15) // 16) + 1
     height = (resize[1] + 15) // 16
-    class MATest(picamera.array.PiMotionAnalysis):
+    class MATest(picamerax.array.PiMotionAnalysis):
         def __init__(self, camera, size):
             super(MATest, self).__init__(camera, size)
             self.write_called = False
@@ -279,7 +279,7 @@ def test_motion_analysis2(camera, mode):
     with MATest(camera, size=resize) as stream:
         camera.start_recording(
             '/dev/null', 'h264', motion_output=stream, resize=resize)
-        camera.wait_recording(1)
+        camera.wait_recording(2)
         camera.stop_recording()
         assert stream.write_called
 
@@ -347,27 +347,27 @@ def test_overlay_array3(camera, mode):
     finally:
         camera.remove_overlay(overlay)
     # Make sure it fails with RGB or BGR
-    with pytest.raises(picamera.PiCameraError):
+    with pytest.raises(picamerax.PiCameraError):
         overlay = camera.add_overlay(a, (32, 32), 'rgb')
-    with pytest.raises(picamera.PiCameraError):
+    with pytest.raises(picamerax.PiCameraError):
         overlay = camera.add_overlay(a, (32, 32), 'bgr')
 
 def test_bayer_bad(camera):
-    stream = picamera.array.PiBayerArray(camera)
+    stream = picamerax.array.PiBayerArray(camera)
     stream.write(b'\x00' * 12000000)
-    with pytest.raises(picamera.PiCameraValueError):
+    with pytest.raises(picamerax.PiCameraValueError):
         stream.flush()
 
 def test_array_writable(camera):
-    stream = picamera.array.PiRGBArray(camera)
+    stream = picamerax.array.PiRGBArray(camera)
     assert stream.writable()
 
 def test_array_no_analyze(camera):
-    stream = picamera.array.PiRGBAnalysis(camera)
+    stream = picamerax.array.PiRGBAnalysis(camera)
     res = camera.resolution.pad()
     with pytest.raises(NotImplementedError):
         stream.write(b'\x00' * (res.width * res.height * 3))
 
 def test_analysis_writable(camera):
-    stream = picamera.array.PiRGBAnalysis(camera)
+    stream = picamerax.array.PiRGBAnalysis(camera)
     assert stream.writable()

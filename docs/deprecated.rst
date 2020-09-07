@@ -4,9 +4,9 @@
 Deprecated Functionality
 ========================
 
-.. currentmodule:: picamera
+.. currentmodule:: picamerax
 
-The picamera library is (at the time of writing) nearly a year old and has
+The picamerax library is (at the time of writing) nearly a year old and has
 grown quite rapidly in this time. Occasionally, when adding new functionality
 to the library, the API is obvious and natural (e.g.
 :meth:`~PiCamera.start_recording` and :meth:`~PiCamera.stop_recording`). At
@@ -31,7 +31,7 @@ functionality would be removed would be version 2.0, and as of the release of
 currently deprecated functions.
 
 Of course, that still means people need a way of determining whether their
-scripts use any deprecated functionality in the picamera library. All
+scripts use any deprecated functionality in the picamerax library. All
 deprecated functionality is documented, and the documentation includes pointers
 to the intended replacement functionality (see :attr:`~PiCamera.raw_format` for
 example). However, Python also provides excellent methods for determining
@@ -53,9 +53,9 @@ The following example script uses a number of deprecated functions::
 
     import io
     import time
-    import picamera
+    import picamerax
 
-    with picamera.PiCamera() as camera:
+    with picamerax.PiCamera() as camera:
         camera.resolution = (1280, 720)
         camera.framerate = (24, 1)
         camera.start_preview()
@@ -67,7 +67,7 @@ The following example script uses a number of deprecated functions::
         camera.capture(stream, 'raw', use_video_port=True)
 
 Despite using deprecated functionality the script runs happily (and silently)
-with picamera 1.8. To discover what deprecated functions are being used, we add
+with picamerax 1.8. To discover what deprecated functions are being used, we add
 a couple of lines to tell the warnings module that we want "default" handling
 of :exc:`DeprecationWarning`; "default" handling means that the first time an
 attempt is made to raise this warning at a particular location, the warning's
@@ -77,12 +77,12 @@ from tight loops. With this change, the script looks like this::
 
     import io
     import time
-    import picamera
+    import picamerax
 
     import warnings
     warnings.filterwarnings('default', category=DeprecationWarning)
 
-    with picamera.PiCamera() as camera:
+    with picamerax.PiCamera() as camera:
         camera.resolution = (1280, 720)
         camera.framerate = (24, 1)
         camera.start_preview()
@@ -97,17 +97,17 @@ And produces the following output on the console when run:
 
 .. code-block:: text
 
-    /usr/share/pyshared/picamera/camera.py:149: DeprecationWarning: Setting framerate or gains as a tuple is deprecated; please use one of Python's many numeric classes like int, float, Decimal, or Fraction instead
+    /usr/share/pyshared/picamerax/camera.py:149: DeprecationWarning: Setting framerate or gains as a tuple is deprecated; please use one of Python's many numeric classes like int, float, Decimal, or Fraction instead
       "Setting framerate or gains as a tuple is deprecated; "
-    /usr/share/pyshared/picamera/camera.py:3125: DeprecationWarning: PiCamera.preview_fullscreen is deprecated; use PiCamera.preview.fullscreen instead
+    /usr/share/pyshared/picamerax/camera.py:3125: DeprecationWarning: PiCamera.preview_fullscreen is deprecated; use PiCamera.preview.fullscreen instead
       'PiCamera.preview_fullscreen is deprecated; '
-    /usr/share/pyshared/picamera/camera.py:3068: DeprecationWarning: PiCamera.preview_alpha is deprecated; use PiCamera.preview.alpha instead
+    /usr/share/pyshared/picamerax/camera.py:3068: DeprecationWarning: PiCamera.preview_alpha is deprecated; use PiCamera.preview.alpha instead
       'PiCamera.preview_alpha is deprecated; use '
-    /usr/share/pyshared/picamera/camera.py:1833: DeprecationWarning: PiCamera.raw_format is deprecated; use required format directly with capture methods instead
+    /usr/share/pyshared/picamerax/camera.py:1833: DeprecationWarning: PiCamera.raw_format is deprecated; use required format directly with capture methods instead
       'PiCamera.raw_format is deprecated; use required format '
-    /usr/share/pyshared/picamera/camera.py:1359: DeprecationWarning: The "raw" format option is deprecated; specify the required format directly instead ("yuv", "rgb", etc.)
+    /usr/share/pyshared/picamerax/camera.py:1359: DeprecationWarning: The "raw" format option is deprecated; specify the required format directly instead ("yuv", "rgb", etc.)
       'The "raw" format option is deprecated; specify the '
-    /usr/share/pyshared/picamera/camera.py:1827: DeprecationWarning: PiCamera.raw_format is deprecated; use required format directly with capture methods instead
+    /usr/share/pyshared/picamerax/camera.py:1827: DeprecationWarning: PiCamera.raw_format is deprecated; use required format directly with capture methods instead
       'PiCamera.raw_format is deprecated; use required format '
 
 This tells us which pieces of deprecated functionality are being used in our
@@ -119,12 +119,12 @@ full stack trace::
 
     import io
     import time
-    import picamera
+    import picamerax
 
     import warnings
     warnings.filterwarnings('error', category=DeprecationWarning)
 
-    with picamera.PiCamera() as camera:
+    with picamerax.PiCamera() as camera:
         camera.resolution = (1280, 720)
         camera.framerate = (24, 1)
         camera.start_preview()
@@ -142,9 +142,9 @@ Now when we run the script it produces the following:
     Traceback (most recent call last):
       File "test_deprecated.py", line 10, in <module>
         camera.framerate = (24, 1)
-      File "/usr/share/pyshared/picamera/camera.py", line 1888, in _set_framerate
+      File "/usr/share/pyshared/picamerax/camera.py", line 1888, in _set_framerate
         n, d = to_rational(value)
-      File "/usr/share/pyshared/picamera/camera.py", line 149, in to_rational
+      File "/usr/share/pyshared/picamerax/camera.py", line 149, in to_rational
         "Setting framerate or gains as a tuple is deprecated; "
     DeprecationWarning: Setting framerate or gains as a tuple is deprecated; please use one of Python's many numeric classes like int, float, Decimal, or Fraction instead
 
@@ -157,7 +157,7 @@ tuple for the framerate. Now we run again, and this time get the following:
     Traceback (most recent call last):
       File "test_deprecated.py", line 12, in <module>
         camera.preview_fullscreen = True
-      File "/usr/share/pyshared/picamera/camera.py", line 3125, in _set_preview_fullscreen
+      File "/usr/share/pyshared/picamerax/camera.py", line 3125, in _set_preview_fullscreen
         'PiCamera.preview_fullscreen is deprecated; '
     DeprecationWarning: PiCamera.preview_fullscreen is deprecated; use PiCamera.preview.fullscreen instead
 
@@ -166,12 +166,12 @@ how to fix it. We continue in this fashion until the script looks like this::
 
     import io
     import time
-    import picamera
+    import picamerax
 
     import warnings
     warnings.filterwarnings('error', category=DeprecationWarning)
 
-    with picamera.PiCamera() as camera:
+    with picamerax.PiCamera() as camera:
         camera.resolution = (1280, 720)
         camera.framerate = 24
         camera.start_preview()
@@ -203,7 +203,7 @@ documented in the prior section as well.
 Unencoded captures
 ------------------
 
-In very early versions of picamera, unencoded captures were created by
+In very early versions of picamerax, unencoded captures were created by
 specifying the ``'raw'`` format with the :meth:`~PiCamera.capture` method, with
 the :attr:`~PiCamera.raw_format` attribute providing the actual encoding. The
 attribute is deprecated, as is usage of the value ``'raw'`` with the *format*
@@ -248,8 +248,8 @@ like so::
 Fractions as tuples
 -------------------
 
-Several attributes in picamera expect rational (fractional) values. In early
-versions of picamera, these values could only be specified as a tuple expressed
+Several attributes in picamerax expect rational (fractional) values. In early
+versions of picamerax, these values could only be specified as a tuple expressed
 as ``(numerator, denominator)``. In later versions, support was expanded to
 accept any of Python's numeric types.
 
@@ -382,19 +382,19 @@ overridden in 1.8 to maintain its unusual behaviour, but this behaviour is
 nonetheless deprecated.
 
 The following snippet illustrates the method of truncating an array stream
-in picamera versions 1.7 and older::
+in picamerax versions 1.7 and older::
 
-    with picamera.array.PiYUVArray(camera) as stream:
+    with picamerax.array.PiYUVArray(camera) as stream:
         for i in range(3):
             camera.capture(stream, 'yuv')
             print(stream.array.shape)
             stream.truncate(0)
 
-If you only need your script to work with picamera versions 1.8 and newer,
+If you only need your script to work with picamerax versions 1.8 and newer,
 such code should be updated to use ``seek`` and ``truncate`` as you would
 with any regular Python stream instance::
 
-    with picamera.array.PiYUVArray(camera) as stream:
+    with picamerax.array.PiYUVArray(camera) as stream:
         for i in range(3):
             camera.capture(stream, 'yuv')
             print(stream.array.shape)
@@ -402,11 +402,11 @@ with any regular Python stream instance::
             stream.truncate()
 
 Unfortunately, this will not work if your script needs to work with prior
-versions of picamera as well (since such streams were non-seekable in prior
+versions of picamerax as well (since such streams were non-seekable in prior
 versions). In this case, call :meth:`~io.BytesIO.seekable` to determine the
 correct course of action::
 
-    with picamera.array.PiYUVArray(camera) as stream:
+    with picamerax.array.PiYUVArray(camera) as stream:
         for i in range(3):
             camera.capture(stream, 'yuv')
             print(stream.array.shape)
@@ -483,9 +483,9 @@ The following code illustrates usage of the deprecated boolean fields::
 In such cases, test the :attr:`~PiVideoFrame.frame_type` attribute against the
 corresponding value of the :class:`PiVideoFrameType` enumeration::
 
-    if camera.frame.frame_type == picamera.PiVideoFrameType.key_frame:
+    if camera.frame.frame_type == picamerax.PiVideoFrameType.key_frame:
         handle_keyframe()
-    elif camera.frame.frame_type == picamera.PiVideoFrameType.sps_header:
+    elif camera.frame.frame_type == picamerax.PiVideoFrameType.sps_header:
         handle_header()
     else:
         handle_frame()
@@ -495,9 +495,9 @@ proof as it'll throw a :exc:`KeyError` in the event of an unrecognized
 frame type)::
 
     handler = {
-        picamera.PiVideoFrameType.key_frame:  handle_keyframe,
-        picamera.PiVideoFrameType.sps_header: handle_header,
-        picamera.PiVideoFrameType.frame:      handle_frame,
+        picamerax.PiVideoFrameType.key_frame:  handle_keyframe,
+        picamerax.PiVideoFrameType.sps_header: handle_header,
+        picamerax.PiVideoFrameType.frame:      handle_frame,
         }[camera.frame.frame_type]
     handler()
 
@@ -509,7 +509,7 @@ Annotation background color
 
 In release 1.10, the :attr:`~PiCamera.annotate_background` attribute was
 enhanced to support setting the background color of annotation text. Older
-versions of picamera treated this attribute as a bool (``False`` for no
+versions of picamerax treated this attribute as a bool (``False`` for no
 background, ``True`` to draw a black background).
 
 In order to provide the new functionality while maintaining a certain amount of
@@ -531,7 +531,7 @@ can only produce a black background, so you may wish to stick with black to
 ensure equivalent behaviour::
 
     camera.annotate_background = None
-    camera.annotate_background = picamera.Color('black')
+    camera.annotate_background = picamerax.Color('black')
 
 Naive tests against the attribute should work as normal, but specific tests
 (which are considered bad practice anyway), should be re-written. The following
@@ -554,22 +554,22 @@ in the test (this is a general rule, not limited to this deprecation case)::
 Analysis classes use analyze
 ----------------------------
 
-The various analysis classes in :mod:`picamera.array` were adjusted in 1.11 to
+The various analysis classes in :mod:`picamerax.array` were adjusted in 1.11 to
 use :meth:`~array.PiAnalysisOutput.analyze` (US English spelling) instead of
 ``analyse`` (UK English spelling). The following example illustrates the old
 usage::
 
-    import picamera.array
+    import picamerax.array
 
-    class MyAnalyzer(picamera.array.PiRGBAnalysis):
+    class MyAnalyzer(picamerax.array.PiRGBAnalysis):
         def analyse(self, array):
             print('Array shape:', array.shape)
 
 This should simply be re-written as::
 
-    import picamera.array
+    import picamerax.array
 
-    class MyAnalyzer(picamera.array.PiRGBAnalysis):
+    class MyAnalyzer(picamerax.array.PiRGBAnalysis):
         def analyze(self, array):
             print('Array shape:', array.shape)
 
@@ -581,35 +581,35 @@ The :class:`PiCamera` class was adjusted in 1.14 to expect keyword arguments on
 construction. The following used to be accepted (although it was still rather
 bad practice)::
 
-    import picamera
+    import picamerax
 
-    camera = picamera.PiCamera(0, 'none', False, '720p')
+    camera = picamerax.PiCamera(0, 'none', False, '720p')
 
 This should now be re-written as::
 
-    import picamera
+    import picamerax
 
-    camera = picamera.PiCamera(camera_num=0, stereo_mode='none',
+    camera = picamerax.PiCamera(camera_num=0, stereo_mode='none',
                                stereo_decimate=False, resolution='720p')
 
 Although if you only wanted to set ``resolution`` you could simply write this
 as::
 
-    import picamera
+    import picamerax
 
-    camera = picamera.PiCamera(resolution='720p')
+    camera = picamerax.PiCamera(resolution='720p')
 
 
 Color module
 ------------
 
-The :mod:`picamera.color` module has now been split off into the `colorzero`_
+The :mod:`picamerax.color` module has now been split off into the `colorzero`_
 library and as such is deprecated in its entirety. The `colorzero`_ library
 contains everything that the color module used, along with a few enhancements
 and several bug fixes and as such the transition is expected to be trivial.
-Look for any imports of the :class:`~picamera.color.Color` class::
+Look for any imports of the :class:`~picamerax.color.Color` class::
 
-    from picamera import Color
+    from picamerax import Color
 
     c = Color('green')
 
@@ -619,20 +619,20 @@ Replace these with references to :class:`colorzero.Color` instead::
 
     c = Color('green')
 
-Alternatively, if the :class:`~picamera.color.Color` class is being used
-directly from picamera itself::
+Alternatively, if the :class:`~picamerax.color.Color` class is being used
+directly from picamerax itself::
 
-    import picamera
+    import picamerax
 
-    camera = picamera.PiCamera()
-    c = picamera.Color('red')
+    camera = picamerax.PiCamera()
+    c = picamerax.Color('red')
 
 In this case add an import for colorzero, and reference the class from there::
 
-    import picamera
+    import picamerax
     import colorzero
 
-    camera = picamera.PiCamera()
+    camera = picamerax.PiCamera()
     c = colorzero.Color('red')
 
 

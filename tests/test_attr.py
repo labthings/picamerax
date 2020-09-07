@@ -37,8 +37,8 @@ from __future__ import (
 # Make Py2's str equivalent to Py3's
 str = type('')
 
-import picamera
-from picamera.color import Color
+import picamerax
+from picamerax.color import Color
 import pytest
 import time
 from fractions import Fraction
@@ -53,9 +53,9 @@ def numeric_attr(camera, attr, value_min, value_max, step=1):
         for value in range(value_min, value_max + 1, step):
             setattr(camera, attr, value)
             assert value == getattr(camera, attr)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             setattr(camera, attr, value_min - 1)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             setattr(camera, attr, value_max + 1)
     finally:
         setattr(camera, attr, save_value)
@@ -66,7 +66,7 @@ def keyword_attr(camera, attr, values):
         for value in values:
             setattr(camera, attr, value)
             assert value == getattr(camera, attr)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             setattr(camera, attr, 'foobar')
     finally:
         setattr(camera, attr, save_value)
@@ -95,9 +95,9 @@ def test_annotate_text(camera, previewing):
         assert camera.annotate_text == 'foo'
         camera.annotate_text = 'foo bar baz quux xyzzy'
         assert camera.annotate_text == 'foo bar baz quux xyzzy'
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             camera.annotate_text = ('abcd' * 64) + 'a'
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             camera.annotate_text = 'Oh lá lá'
     finally:
         camera.annotate_text = save_value
@@ -111,11 +111,11 @@ def test_annotate_foreground(camera, previewing):
         camera.annotate_foreground = Color('black')
         camera.annotate_foreground = Color('white')
         camera.annotate_foreground = Color.from_yuv(0.5, 0, 0)
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             camera.annotate_foreground = 'white'
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             camera.annotate_foreground = 0
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             camera.annotate_foreground = None
     finally:
         camera.annotate_foreground = save_value
@@ -126,9 +126,9 @@ def test_annotate_background(camera, previewing):
         camera.annotate_background = Color('black')
         camera.annotate_background = Color('white')
         camera.annotate_background = Color(128, 128, 0)
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             camera.annotate_background = 'black'
-        with pytest.raises(picamera.PiCameraValueError):
+        with pytest.raises(picamerax.PiCameraValueError):
             camera.annotate_background = 0
         camera.annotate_background = None
     finally:
@@ -164,7 +164,7 @@ def test_awb_gains(camera, previewing):
         check_gains(0.5, 0.5)
         camera.awb_gains = (Fraction(16, 10), 1.9)
         check_gains(1.6, 1.9)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.awb_gains = Fraction(20, 1)
     finally:
         camera.awb_mode = save_mode
@@ -183,9 +183,9 @@ def test_color_effects(camera, previewing):
         assert camera.color_effects == (0, 255)
         camera.color_effects = (255, 0)
         assert camera.color_effects == (255, 0)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.color_effects = (-1, -1)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.color_effects = (0, 300)
     finally:
         camera.color_effects = save_value
@@ -254,7 +254,7 @@ def test_image_effects2(camera, previewing):
         for effect, params_sets in invalid_combinations.items():
             camera.image_effect = effect
             for params in params_sets:
-                with pytest.raises(picamera.PiCameraValueError):
+                with pytest.raises(picamerax.PiCameraValueError):
                     camera.image_effect_params = params
     finally:
         camera.image_effect = 'none'
@@ -391,9 +391,9 @@ def test_preview_resolution(camera, previewing):
             assert camera.preview.resolution is None
             assert camera._camera.outputs[0].framesize == (1280, 720)
             assert camera._camera.outputs[2].framesize == (1280, 720)
-            with pytest.raises(picamera.PiCameraValueError):
+            with pytest.raises(picamerax.PiCameraValueError):
                 camera.preview.resolution = (1281, 720)
-            with pytest.raises(picamera.PiCameraValueError):
+            with pytest.raises(picamerax.PiCameraValueError):
                 camera.preview.resolution = (1280, 721)
         finally:
             camera.resolution = save_resolution
@@ -424,7 +424,7 @@ def test_sensor_mode(camera, previewing):
         for mode in range(8):
             camera.sensor_mode = mode
             assert camera.sensor_mode == mode
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.sensor_mode = 10
     finally:
         camera.sensor_mode = save_mode
@@ -485,13 +485,13 @@ def test_framerate(camera, previewing):
         camera.framerate = 90
         n, d = camera.framerate
         assert n/d == 90
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.framerate = (30, 0)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.framerate = -1
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.framerate = 200
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.framerate = 0
     finally:
         camera.framerate = save_framerate
@@ -514,13 +514,13 @@ def test_framerate_range(camera, previewing):
         camera.framerate_range = (1, 30.0)
         assert camera.framerate == 0
         assert camera.framerate_range == (1, 30)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.framerate_delta = 1
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.framerate_range = (1, 200)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.framerate_range = (0, 30)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.framerate_range = (2, 1)
     finally:
         camera.framerate = save_framerate
@@ -556,9 +556,9 @@ def test_resolution(camera, previewing):
         assert camera._camera.outputs[2]._port[0].format[0].es[0].video.height == 112
         # Anything below 16,16 will fail (because the camera's vertical
         # resolution works in increments of 16)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.resolution = (0, 0)
-        with pytest.raises(picamera.PiCameraError):
+        with pytest.raises(picamerax.PiCameraError):
             camera.resolution = (15, 15)
     finally:
         camera.resolution = save_resolution

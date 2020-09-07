@@ -1,5 +1,5 @@
 from time import sleep
-from picamera import PiCamera
+from picamerax import PiCamera
 
 # Explicitly open a new file called my_image.jpg
 my_file = open('my_image.jpg', 'wb')

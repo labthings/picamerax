@@ -2,13 +2,13 @@ import io
 import socket
 import struct
 import time
-import picamera
+import picamerax
 
 client_socket = socket.socket()
 client_socket.connect(('my_server', 8000))
 connection = client_socket.makefile('wb')
 try:
-    with picamera.PiCamera() as camera:
+    with picamerax.PiCamera() as camera:
         camera.resolution = (640, 480)
         camera.framerate = 30
         time.sleep(2)

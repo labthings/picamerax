@@ -1,5 +1,5 @@
 from time import sleep
-from picamera import PiCamera
+from picamerax import PiCamera
 from datetime import datetime, timedelta
 
 def wait():

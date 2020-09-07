@@ -2,7 +2,7 @@ import io
 import socket
 import struct
 import time
-import picamera
+import picamerax
 
 class SplitFrames(object):
     def __init__(self, connection):
@@ -29,7 +29,7 @@ client_socket.connect(('my_server', 8000))
 connection = client_socket.makefile('wb')
 try:
     output = SplitFrames(connection)
-    with picamera.PiCamera(resolution='VGA', framerate=30) as camera:
+    with picamerax.PiCamera(resolution='VGA', framerate=30) as camera:
         time.sleep(2)
         start = time.time()
         camera.start_recording(output, format='mjpeg')

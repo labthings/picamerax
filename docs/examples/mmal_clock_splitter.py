@@ -5,7 +5,7 @@ from collections import namedtuple
 from math import sin, cos, pi
 from time import sleep
 
-from picamera import mmal, mmalobj as mo, PiCameraPortDisabled
+from picamerax import mmal, mmalobj as mo, PiCameraPortDisabled
 from PIL import Image, ImageDraw
 
 

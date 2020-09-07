@@ -1,4 +1,4 @@
-picamera (1.13) stable; urgency=low
+picamerax (1.13) stable; urgency=low
 
   * 10 second captures should now work with the V2 module as the default
     CAPTURE_TIMEOUT has been increased to 60 seconds (#284)
@@ -40,18 +40,18 @@ picamera (1.13) stable; urgency=low
 
  -- Dave Jones <dave@waveform.org.uk>  Sat, 25 Feb 2017 20:12:34 +0000
 
-picamera (1.12) stable; urgency=low
+picamerax (1.12) stable; urgency=low
 
   * Fixed issue with unencoded captures in Python 3 (#297)
   * Fixed several Python 3 bytes/unicode issues that were related to #297 (I'd
-    erroneously run the picamera test suite twice against Python 2 instead of
+    erroneously run the picamerax test suite twice against Python 2 instead of
     2 and 3 when releasing 1.11, which is how these snuck in)
   * Fixed multi-dimensional arrays for overlays under Python 3
   * Finished alternate CIE constructors for the Color class
 
  -- Dave Jones <dave@waveform.org.uk>  Mon, 04 Jul 2016 00:02:48 +0100
 
-picamera (1.11) stable; urgency=low
+picamerax (1.11) stable; urgency=low
 
   * Direct capture to buffer-protocol objects, such as numpy arrays (#241)
   * Add PiCamera.request_key_frame method to permit manual request of an
@@ -80,7 +80,7 @@ picamera (1.11) stable; urgency=low
 
  -- Dave Jones <dave@waveform.org.uk>  Sun, 19 Jun 2016 22:30:59 +0100
 
-picamera (1.10-1) stable; urgency=low
+picamerax (1.10-1) stable; urgency=low
 
   * The major enhancement is the addition of support for the camera's flash
     driver. This is relatively complex to configure, but a full recipe has
@@ -101,7 +101,7 @@ picamera (1.10-1) stable; urgency=low
 
  -- Dave Jones <dave@waveform.org.uk>  Tue, 31 Mar 2015 02:01:42 +0100
 
-picamera (1.9-1) stable; urgency=low
+picamerax (1.9-1) stable; urgency=low
 
   * The camera's sensor mode can now be forced to a particular setting upon
     camera initialization with the new sensor_mode parameter to PiCamera()
@@ -128,7 +128,7 @@ picamera (1.9-1) stable; urgency=low
 
  -- Dave Hughes <dave@waveform.org.uk>  Fri, 02 Jan 2015 02:51:24 +0000
 
-picamera (1.8-1) stable; urgency=low
+picamerax (1.8-1) stable; urgency=low
 
   * A new chapter on detecting and correcting deprecated functionality was
     added to the docs (#149)
@@ -161,7 +161,7 @@ picamera (1.8-1) stable; urgency=low
 
  -- Dave Hughes <dave@waveform.org.uk>  Sat, 06 Sep 2014 01:31:56 +0100
 
-picamera (1.7-1) stable; urgency=low
+picamerax (1.7-1) stable; urgency=low
 
   * Text overlay on preview, image, and video output is now possible (#16)
   * Support for more than one camera on the compute module has been added, but
@@ -173,7 +173,7 @@ picamera (1.7-1) stable; urgency=low
     (#130)
   * Support for unencoded formats (YUV, RGB, etc.) has been added to the
     start_recording method (#132)
-  * A couple of analysis classes have been added to picamera.array to support
+  * A couple of analysis classes have been added to picamerax.array to support
     the new unencoded recording formats (#139)
   * Several issues in the PiBayerArray class were fixed; this should now work
     correctly with Python 3, and the demosaic method should operate correctly
@@ -185,7 +185,7 @@ picamera (1.7-1) stable; urgency=low
 
  -- Dave Hughes <dave@waveform.org.uk>  Fri, 08 Aug 2014 19:02:27 +0100
 
-picamera (1.6-1) stable; urgency=low
+picamerax (1.6-1) stable; urgency=low
 
   * The awb_gains attribute is no longer write-only; you can now read it to
     determine the red/blue balance that the camera is using (#98)
@@ -210,14 +210,14 @@ picamera (1.6-1) stable; urgency=low
     resizers were present in the pipeline. This has been fixed by adding a
     size parameter to the constructor of all the custom output classes defined
     in that module (#121)
-  * A bug that caused picamera to fail when the display was disabled has been
+  * A bug that caused picamerax to fail when the display was disabled has been
     squashed (#120)
 
  -- Dave Hughes <dave@waveform.org.uk>  Sat, 19 Jul 2014 17:07:41 +0100
 
-picamera (1.5-1) stable; urgency=low
+picamerax (1.5-1) stable; urgency=low
 
-  * The new picamera.array module provides a series of custom output classes
+  * The new picamerax.array module provides a series of custom output classes
     which can be used to easily obtain numpy arrays from a variety of sources
     (#107)
   * The motion_output parameter was added to start_recording to enable output
@@ -233,13 +233,13 @@ picamera (1.5-1) stable; urgency=low
     alpha-inclusive modes like RGBA has been removed as a result (#103)
   * An issue with out-of-order calls to stop_recording when multiple
     recordings were active was resolved (#105)
-  * Finally, picamera caught up with raspistill and raspivid by offering a
+  * Finally, picamerax caught up with raspistill and raspivid by offering a
     friendly error message when used with a disabled camera - thanks to Andrew
     Scheller (lurch) for the suggestion! (#89)
 
  -- Dave Hughes <dave@waveform.org.uk>  Wed, 11 Jun 2014 20:06:34 +0100
 
-picamera (1.4-1) stable; urgency=low
+picamerax (1.4-1) stable; urgency=low
 
   * The sei parameter was added to start_recording to permit inclusion of
     "Supplemental Enhancement Information" in the output stream (#77)
@@ -247,7 +247,7 @@ picamera (1.4-1) stable; urgency=low
     auto-white-balance red/blue gains (#74)
   * A bug which caused split_recording to fail when low framerates were
     configured was fixed (#87)
-  * A bug which caused picamera to fail when used in UNIX-style daemons,
+  * A bug which caused picamerax to fail when used in UNIX-style daemons,
     unless the module was imported *after* the double-fork to background was
     fixed (#85)
   * A bug which caused the frame attribute to fail when queried in Python 3
@@ -261,7 +261,7 @@ picamera (1.4-1) stable; urgency=low
 
  -- Dave Hughes <dave@waveform.org.uk>  Wed, 07 May 2014 00:25:36 +0100
 
-picamera (1.3-1) stable; urgency=low
+picamerax (1.3-1) stable; urgency=low
 
   * The bayer parameter was added to the 'jpeg' format in the capture methods
     to permit output of the camera's raw sensor data (#52)
@@ -280,7 +280,7 @@ picamera (1.3-1) stable; urgency=low
 
  -- Dave Hughes <dave@waveform.org.uk>  Sat, 22 Mar 2014 19:52:20 +0000
 
-picamera (1.2-1) stable; urgency=low
+picamerax (1.2-1) stable; urgency=low
 
   * A bug introduced in 1.1 caused split_recording to fail if it was preceded
     by a video-port-based image capture (#49)
@@ -293,7 +293,7 @@ picamera (1.2-1) stable; urgency=low
 
  -- Dave Hughes <dave@waveform.org.uk>  Sun, 02 Feb 2014 03:18:19 +0000
 
-picamera (1.1-1) stable; urgency=low
+picamerax (1.1-1) stable; urgency=low
 
   * A nasty race condition was discovered which led to crashes with
     long-running processes (#40)
@@ -303,7 +303,7 @@ picamera (1.1-1) stable; urgency=low
 
  -- Dave Hughes <dave@waveform.org.uk>  Sat, 25 Jan 2014 23:32:18 +0000
 
-picamera (1.0-1) stable; urgency=low
+picamerax (1.0-1) stable; urgency=low
 
   * Debian packaging! (#12)
   * The new frame attribute permits querying information about the frame last
@@ -320,14 +320,14 @@ picamera (1.0-1) stable; urgency=low
     raw_format attribute is now deprecated (#32)
   * GPIO.cleanup is no longer called on close (#35), and GPIO set up is only
     done on first use of the led attribute which should resolve issues that
-    users have been having with using picamera in conjunction with GPIO
+    users have been having with using picamerax in conjunction with GPIO
   * Raw RGB video-port based image captures are now working again too (#32)
   * The continuous method was removed; this was replaced by capture_continuous
     in 0.5 (#7)
 
  -- Dave Hughes <dave@waveform.org.uk>  Mon, 11 Jan 2014 09:00:00 +0000
 
-picamera (0.8-1) UNRELEASED; urgency=low
+picamerax (0.8-1) UNRELEASED; urgency=low
 
   * Added capture of images whilst recording without frame-drop. Previously,
     images could be captured whilst recording but only from the still port
@@ -349,7 +349,7 @@ picamera (0.8-1) UNRELEASED; urgency=low
 
  -- Dave Hughes <dave@waveform.org.uk>  Mon, 09 Dec 2013 05:15:00 +0000
 
-picamera (0.7-1) UNRELEASED; urgency=low
+picamerax (0.7-1) UNRELEASED; urgency=low
 
   * Added quantisation and inline_headers options to start_recording() method
   * Fixed bugs in the crop property
@@ -363,7 +363,7 @@ picamera (0.7-1) UNRELEASED; urgency=low
 
  --  Dave Hughes <dave@waveform.org.uk>  Thu, 14 Nov 2013 20:03:00 +0000
 
-picamera (0.6-1) UNRELEASED; urgency=low
+picamerax (0.6-1) UNRELEASED; urgency=low
 
   * New raw format added to all capture methods (capture, capture_continuous,
     and capture_sequence) to permit capturing of raw sensor data
@@ -377,7 +377,7 @@ picamera (0.6-1) UNRELEASED; urgency=low
 
  --  Dave Hughes <dave@waveform.org.uk>  Wed, 30 Oct 2013 01:28:00 +0000
 
-picamera (0.5-1) UNRELEASED; urgency=low
+picamerax (0.5-1) UNRELEASED; urgency=low
 
   * New capture_sequence() method
   * continuous() method renamed to capture_continuous(). Old method name
@@ -392,7 +392,7 @@ picamera (0.5-1) UNRELEASED; urgency=low
 
  --  Dave Hughes <dave@waveform.org.uk>  Mon, 21 Oct 2013 02:06:00 +0000
 
-picamera (0.4-1) UNRELEASED; urgency=low
+picamerax (0.4-1) UNRELEASED; urgency=low
 
   * Added new attributes preview_alpha, preview_fullscreen, and preview_window
     for controlling the preview window
@@ -400,7 +400,7 @@ picamera (0.4-1) UNRELEASED; urgency=low
 
  --  Dave Hughes <dave@waveform.org.uk>  Fri, 11 Oct 2013 01:37:00 +0000
 
-picamera (0.3-1) UNRELEASED; urgency=low
+picamerax (0.3-1) UNRELEASED; urgency=low
 
   * Added custom Exif tagging for captured images
   * Fixed silly bug which prevented more than one image being captured during

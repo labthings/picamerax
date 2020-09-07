@@ -37,7 +37,7 @@ from __future__ import (
 # Make Py2's str equivalent to Py3's
 str = type('')
 
-import picamera
+import picamerax
 import pytest
 import tempfile
 import shutil
@@ -47,7 +47,7 @@ import shutil
 # This should be used for tests which cannot be run when a preview is active
 @pytest.fixture(scope='function')
 def camera(request):
-    camera = picamera.PiCamera()
+    camera = picamerax.PiCamera()
     def fin():
         camera.close()
     request.addfinalizer(fin)
@@ -85,11 +85,11 @@ def mode(request, camera):
             camera.resolution = save_resolution
             camera.framerate = save_framerate
     request.addfinalizer(fin)
-    return (picamera.PiResolution(*new_resolution), new_framerate)
+    return (picamerax.PiResolution(*new_resolution), new_framerate)
 
 # A fixture for temporary directories which cleans them up immediately after
 # usage (the built-in tmpdir fixture only cleans up after several test runs
-# and with the number of picamera tests that now exist, that can easily fill
+# and with the number of picamerax tests that now exist, that can easily fill
 # the 16Gb SD card in the dev rig)
 @pytest.fixture()
 def tempdir(request):

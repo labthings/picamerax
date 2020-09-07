@@ -1,9 +1,9 @@
 import time
-import picamera
+import picamerax
 import numpy as np
 import cv2
 
-with picamera.PiCamera() as camera:
+with picamerax.PiCamera() as camera:
     camera.resolution = (320, 240)
     camera.framerate = 24
     time.sleep(2)

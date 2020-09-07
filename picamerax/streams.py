@@ -44,15 +44,15 @@ from collections import deque
 from operator import attrgetter
 from weakref import ref
 
-from picamera.exc import PiCameraValueError
-from picamera.frames import PiVideoFrame, PiVideoFrameType
+from picamerax.exc import PiCameraValueError
+from picamerax.frames import PiVideoFrame, PiVideoFrameType
 
 
 class BufferIO(io.IOBase):
     """
     A stream which uses a :class:`memoryview` for storage.
 
-    This is used internally by picamera for capturing directly to an existing
+    This is used internally by picamerax for capturing directly to an existing
     object which supports the buffer protocol (like a numpy array). Because the
     underlying storage is fixed in size, the stream also has a fixed size and
     will raise an :exc:`IOError` exception if an attempt is made to write
@@ -667,10 +667,10 @@ class PiCameraCircularIO(CircularIO):
     something else, ensure it is equal to the *splitter_port* parameter of the
     corresponding call to :meth:`~PiCamera.start_recording`.  For example::
 
-        import picamera
+        import picamerax
 
-        with picamera.PiCamera() as camera:
-            with picamera.PiCameraCircularIO(camera, splitter_port=2) as stream:
+        with picamerax.PiCamera() as camera:
+            with picamerax.PiCameraCircularIO(camera, splitter_port=2) as stream:
                 camera.start_recording(stream, format='h264', splitter_port=2)
                 camera.wait_recording(10, splitter_port=2)
                 camera.stop_recording(splitter_port=2)

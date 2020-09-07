@@ -1,9 +1,9 @@
 import time
-import picamera
-import picamera.array
+import picamerax
+import picamerax.array
 
-with picamera.PiCamera() as camera:
-    with picamera.array.PiYUVArray(camera) as stream:
+with picamerax.PiCamera() as camera:
+    with picamerax.array.PiYUVArray(camera) as stream:
         camera.resolution = (100, 100)
         camera.start_preview()
         time.sleep(2)

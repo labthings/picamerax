@@ -1,8 +1,8 @@
 import io
 import os
-import picamera
+import picamerax
 
-with picamera.PiCamera(resolution='VGA') as camera:
+with picamerax.PiCamera(resolution='VGA') as camera:
     os.mkfifo('video_fifo')
     f = io.open('video_fifo', 'wb', buffering=0)
     try:

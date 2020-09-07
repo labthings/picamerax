@@ -1,7 +1,7 @@
-import picamera
+import picamerax
 import numpy as np
-from picamera.array import PiRGBAnalysis
-from picamera.color import Color
+from picamerax.array import PiRGBAnalysis
+from picamerax.color import Color
 
 class MyColorAnalyzer(PiRGBAnalysis):
     def __init__(self, camera):
@@ -30,7 +30,7 @@ class MyColorAnalyzer(PiRGBAnalysis):
             self.camera.annotate_text = c
             self.last_color = c
 
-with picamera.PiCamera(resolution='160x90', framerate=24) as camera:
+with picamerax.PiCamera(resolution='160x90', framerate=24) as camera:
     # Fix the camera's white-balance gains
     camera.awb_mode = 'off'
     camera.awb_gains = (1.4, 1.5)

@@ -2,7 +2,7 @@ import io
 import time
 import threading
 import queue
-import picamera
+import picamerax
 
 class ImageProcessor(threading.Thread):
     def __init__(self, owner):
@@ -71,7 +71,7 @@ class ProcessOutput(object):
         for proc in self.pool:
             proc.join()
 
-with picamera.PiCamera(resolution='VGA') as camera:
+with picamerax.PiCamera(resolution='VGA') as camera:
     camera.start_preview()
     time.sleep(2)
     output = ProcessOutput(4)

@@ -1,8 +1,8 @@
-import picamera
+import picamerax
 from PIL import Image
 from time import sleep
 
-camera = picamera.PiCamera()
+camera = picamerax.PiCamera()
 camera.resolution = (1280, 720)
 camera.framerate = 24
 camera.start_preview()

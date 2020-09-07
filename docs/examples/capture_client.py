@@ -2,7 +2,7 @@ import io
 import socket
 import struct
 import time
-import picamera
+import picamerax
 
 # Connect a client socket to my_server:8000 (change my_server to the
 # hostname of your server)
@@ -12,7 +12,7 @@ client_socket.connect(('my_server', 8000))
 # Make a file-like object out of the connection
 connection = client_socket.makefile('wb')
 try:
-    camera = picamera.PiCamera()
+    camera = picamerax.PiCamera()
     camera.resolution = (640, 480)
     # Start a preview and let the camera warm up for 2 seconds
     camera.start_preview()

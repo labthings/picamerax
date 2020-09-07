@@ -38,7 +38,7 @@ from __future__ import (
 str = type('')
 
 import numpy as np
-import picamera
+import picamerax
 import pytest
 import mock
 

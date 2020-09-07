@@ -163,7 +163,7 @@ class PiArrayOutput(io.BytesIO):
         if size is not specified). This resizing can extend or reduce the
         current file size.  The new file size is returned.
 
-        In prior versions of picamera, truncation also changed the position of
+        In prior versions of picamerax, truncation also changed the position of
         the stream (because prior versions of these stream classes were
         non-seekable). This functionality is now deprecated; scripts should
         use :meth:`~io.IOBase.seek` and :meth:`truncate` as one would with
@@ -190,11 +190,11 @@ class PiRGBArray(PiArrayOutput):
     The array is accessed via the :attr:`~PiArrayOutput.array` attribute. For
     example::
 
-        import picamera
-        import picamera.array
+        import picamerax
+        import picamerax.array
 
-        with picamera.PiCamera() as camera:
-            with picamera.array.PiRGBArray(camera) as output:
+        with picamerax.PiCamera() as camera:
+            with picamerax.array.PiRGBArray(camera) as output:
                 camera.capture(output, 'rgb')
                 print('Captured %dx%d image' % (
                         output.array.shape[1], output.array.shape[0]))
@@ -202,11 +202,11 @@ class PiRGBArray(PiArrayOutput):
     You can re-use the output to produce multiple arrays by emptying it with
     ``truncate(0)`` between captures::
 
-        import picamera
-        import picamera.array
+        import picamerax
+        import picamerax.array
 
-        with picamera.PiCamera() as camera:
-            with picamera.array.PiRGBArray(camera) as output:
+        with picamerax.PiCamera() as camera:
+            with picamerax.array.PiRGBArray(camera) as output:
                 camera.resolution = (1280, 720)
                 camera.capture(output, 'rgb')
                 print('Captured %dx%d image' % (
@@ -222,12 +222,12 @@ class PiRGBArray(PiArrayOutput):
     resized resolution as the optional *size* parameter when constructing the
     array output::
 
-        import picamera
-        import picamera.array
+        import picamerax
+        import picamerax.array
 
-        with picamera.PiCamera() as camera:
+        with picamerax.PiCamera() as camera:
             camera.resolution = (1280, 720)
-            with picamera.array.PiRGBArray(camera, size=(640, 360)) as output:
+            with picamerax.array.PiRGBArray(camera, size=(640, 360)) as output:
                 camera.capture(output, 'rgb', resize=(640, 360))
                 print('Captured %dx%d image' % (
                         output.array.shape[1], output.array.shape[0]))
@@ -247,11 +247,11 @@ class PiYUVArray(PiArrayOutput):
     The array is accessed via the :attr:`~PiArrayOutput.array` attribute. For
     example::
 
-        import picamera
-        import picamera.array
+        import picamerax
+        import picamerax.array
 
-        with picamera.PiCamera() as camera:
-            with picamera.array.PiYUVArray(camera) as output:
+        with picamerax.PiCamera() as camera:
+            with picamerax.array.PiYUVArray(camera) as output:
                 camera.capture(output, 'yuv')
                 print('Captured %dx%d image' % (
                         output.array.shape[1], output.array.shape[0]))
@@ -259,27 +259,27 @@ class PiYUVArray(PiArrayOutput):
     The :attr:`rgb_array` attribute can be queried for the equivalent RGB
     array (conversion is performed using the `ITU-R BT.601`_ matrix)::
 
-        import picamera
-        import picamera.array
+        import picamerax
+        import picamerax.array
 
-        with picamera.PiCamera() as camera:
-            with picamera.array.PiYUVArray(camera) as output:
+        with picamerax.PiCamera() as camera:
+            with picamerax.array.PiYUVArray(camera) as output:
                 camera.resolution = (1280, 720)
                 camera.capture(output, 'yuv')
                 print(output.array.shape)
                 print(output.rgb_array.shape)
 
     If you are using the GPU resizer when capturing (with the *resize*
-    parameter of the various :meth:`~picamera.PiCamera.capture` methods),
+    parameter of the various :meth:`~picamerax.PiCamera.capture` methods),
     specify the resized resolution as the optional *size* parameter when
     constructing the array output::
 
-        import picamera
-        import picamera.array
+        import picamerax
+        import picamerax.array
 
-        with picamera.PiCamera() as camera:
+        with picamerax.PiCamera() as camera:
             camera.resolution = (1280, 720)
-            with picamera.array.PiYUVArray(camera, size=(640, 360)) as output:
+            with picamerax.array.PiYUVArray(camera, size=(640, 360)) as output:
                 camera.capture(output, 'yuv', resize=(640, 360))
                 print('Captured %dx%d image' % (
                         output.array.shape[1], output.array.shape[0]))
@@ -334,16 +334,16 @@ class PiBayerArray(PiArrayOutput):
     Produces a 3-dimensional RGB array from raw Bayer data.
 
     This custom output class is intended to be used with the
-    :meth:`~picamera.PiCamera.capture` method, with the *bayer* parameter set
+    :meth:`~picamerax.PiCamera.capture` method, with the *bayer* parameter set
     to ``True``, to include raw Bayer data in the JPEG output.  The class
     strips out the raw data, and constructs a numpy array from it.  The
     resulting data is accessed via the :attr:`~PiArrayOutput.array` attribute::
 
-        import picamera
-        import picamera.array
+        import picamerax
+        import picamerax.array
 
-        with picamera.PiCamera() as camera:
-            with picamera.array.PiBayerArray(camera) as output:
+        with picamerax.PiCamera() as camera:
+            with picamerax.array.PiBayerArray(camera) as output:
                 camera.capture(output, 'jpeg', bayer=True)
                 print(output.array.shape)
 
@@ -360,7 +360,7 @@ class PiBayerArray(PiArrayOutput):
         has the shape (1944, 2592, 3) with the V1 module, or (2464, 3280, 3)
         with the V2 module (if two-dimensional output is requested the
         3-layered color dimension is omitted). If the camera's
-        :attr:`~picamera.PiCamera.sensor_mode` has been forced to something
+        :attr:`~picamerax.PiCamera.sensor_mode` has been forced to something
         other than 0, then the output will be the native size for the requested
         sensor mode.
 
@@ -375,11 +375,11 @@ class PiBayerArray(PiArrayOutput):
     in the `Bayer pattern`_). A trivial weighted-average demosaicing algorithm
     is provided in the :meth:`demosaic` method::
 
-        import picamera
-        import picamera.array
+        import picamerax
+        import picamerax.array
 
-        with picamera.PiCamera() as camera:
-            with picamera.array.PiBayerArray(camera) as output:
+        with picamerax.PiCamera() as camera:
+            with picamerax.array.PiBayerArray(camera) as output:
                 camera.capture(output, 'jpeg', bayer=True)
                 print(output.demosaic().shape)
 
@@ -575,7 +575,7 @@ class PiMotionArray(PiArrayOutput):
     Produces a 3-dimensional array of motion vectors from the H.264 encoder.
 
     This custom output class is intended to be used with the *motion_output*
-    parameter of the :meth:`~picamera.PiCamera.start_recording` method.  Once
+    parameter of the :meth:`~picamerax.PiCamera.start_recording` method.  Once
     recording has finished, the class generates a 3-dimensional numpy array
     organized as (frames, rows, columns) where ``rows`` and ``columns`` are the
     number of rows and columns of `macro-blocks`_ (16x16 pixel blocks) in the
@@ -587,11 +587,11 @@ class PiMotionArray(PiArrayOutput):
     unsigned 2-byte value representing the `sum of absolute differences`_ of
     the block. For example::
 
-        import picamera
-        import picamera.array
+        import picamerax
+        import picamerax.array
 
-        with picamera.PiCamera() as camera:
-            with picamera.array.PiMotionArray(camera) as output:
+        with picamerax.PiCamera() as camera:
+            with picamerax.array.PiMotionArray(camera) as output:
                 camera.resolution = (640, 480)
                 camera.start_recording(
                       '/dev/null', format='h264', motion_output=output)
@@ -605,12 +605,12 @@ class PiMotionArray(PiArrayOutput):
     *size* parameter to specify the resizer's output resolution when
     constructing the array::
 
-        import picamera
-        import picamera.array
+        import picamerax
+        import picamerax.array
 
-        with picamera.PiCamera() as camera:
+        with picamerax.PiCamera() as camera:
             camera.resolution = (640, 480)
-            with picamera.array.PiMotionArray(camera, size=(320, 240)) as output:
+            with picamerax.array.PiMotionArray(camera, size=(320, 240)) as output:
                 camera.start_recording(
                     '/dev/null', format='h264', motion_output=output,
                     resize=(320, 240))
@@ -684,7 +684,7 @@ class PiRGBAnalysis(PiAnalysisOutput):
     Provides a basis for per-frame RGB analysis classes.
 
     This custom output class is intended to be used with the
-    :meth:`~picamera.PiCamera.start_recording` method when it is called with
+    :meth:`~picamerax.PiCamera.start_recording` method when it is called with
     *format* set to ``'rgb'`` or ``'bgr'``. While recording is in progress, the
     :meth:`~PiAnalysisOutput.write` method converts incoming frame data into a
     numpy array and calls the stub :meth:`~PiAnalysisOutput.analyze` method
@@ -697,7 +697,7 @@ class PiRGBAnalysis(PiAnalysisOutput):
         If your overridden :meth:`~PiAnalysisOutput.analyze` method runs slower
         than the required framerate (e.g. 33.333ms when framerate is 30fps)
         then the camera's effective framerate will be reduced. Furthermore,
-        this doesn't take into account the overhead of picamera itself so in
+        this doesn't take into account the overhead of picamerax itself so in
         practice your method needs to be a bit faster still.
 
     The array passed to :meth:`~PiAnalysisOutput.analyze` is organized as
@@ -716,7 +716,7 @@ class PiYUVAnalysis(PiAnalysisOutput):
     Provides a basis for per-frame YUV analysis classes.
 
     This custom output class is intended to be used with the
-    :meth:`~picamera.PiCamera.start_recording` method when it is called with
+    :meth:`~picamerax.PiCamera.start_recording` method when it is called with
     *format* set to ``'yuv'``. While recording is in progress, the
     :meth:`~PiAnalysisOutput.write` method converts incoming frame data into a
     numpy array and calls the stub :meth:`~PiAnalysisOutput.analyze` method
@@ -729,7 +729,7 @@ class PiYUVAnalysis(PiAnalysisOutput):
         If your overridden :meth:`~PiAnalysisOutput.analyze` method runs slower
         than the required framerate (e.g. 33.333ms when framerate is 30fps)
         then the camera's effective framerate will be reduced. Furthermore,
-        this doesn't take into account the overhead of picamera itself so in
+        this doesn't take into account the overhead of picamerax itself so in
         practice your method needs to be a bit faster still.
 
     The array passed to :meth:`~PiAnalysisOutput.analyze` is organized as
@@ -750,7 +750,7 @@ class PiMotionAnalysis(PiAnalysisOutput):
     Provides a basis for real-time motion analysis classes.
 
     This custom output class is intended to be used with the *motion_output*
-    parameter of the :meth:`~picamera.PiCamera.start_recording` method.  While
+    parameter of the :meth:`~picamerax.PiCamera.start_recording` method.  While
     recording is in progress, the write method converts incoming motion data
     into numpy arrays and calls the stub :meth:`~PiAnalysisOutput.analyze`
     method with the resulting array (which deliberately raises
@@ -761,7 +761,7 @@ class PiMotionAnalysis(PiAnalysisOutput):
         If your overridden :meth:`~PiAnalysisOutput.analyze` method runs slower
         than the required framerate (e.g. 33.333ms when framerate is 30fps)
         then the camera's effective framerate will be reduced. Furthermore,
-        this doesn't take into account the overhead of picamera itself so in
+        this doesn't take into account the overhead of picamerax itself so in
         practice your method needs to be a bit faster still.
 
     The array passed to :meth:`~PiAnalysisOutput.analyze` is organized as
@@ -777,10 +777,10 @@ class PiMotionAnalysis(PiAnalysisOutput):
     An example of a crude motion detector is given below::
 
         import numpy as np
-        import picamera
-        import picamera.array
+        import picamerax
+        import picamerax.array
 
-        class DetectMotion(picamera.array.PiMotionAnalysis):
+        class DetectMotion(picamerax.array.PiMotionAnalysis):
             def analyze(self, a):
                 a = np.sqrt(
                     np.square(a['x'].astype(np.float)) +
@@ -791,7 +791,7 @@ class PiMotionAnalysis(PiAnalysisOutput):
                 if (a > 60).sum() > 10:
                     print('Motion detected!')
 
-        with picamera.PiCamera() as camera:
+        with picamerax.PiCamera() as camera:
             with DetectMotion(camera) as output:
                 camera.resolution = (640, 480)
                 camera.start_recording(
@@ -801,7 +801,7 @@ class PiMotionAnalysis(PiAnalysisOutput):
 
     You can use the optional *size* parameter to specify the output resolution
     of the GPU resizer, if you are using the *resize* parameter of
-    :meth:`~picamera.PiCamera.start_recording`.
+    :meth:`~picamerax.PiCamera.start_recording`.
     """
 
     def __init__(self, camera, size=None):
@@ -851,7 +851,7 @@ class MMALArrayBuffer(mo.MMALBuffer):
 
 class PiArrayTransform(mo.MMALPythonComponent):
     """
-    A derivative of :class:`~picamera.mmalobj.MMALPythonComponent` which eases
+    A derivative of :class:`~picamerax.mmalobj.MMALPythonComponent` which eases
     the construction of custom MMAL transforms by representing buffer data as
     numpy arrays. The *formats* parameter specifies the accepted input
     formats as a sequence of strings (default: 'rgb', 'bgr', 'rgba', 'bgra').
@@ -905,7 +905,7 @@ class PiArrayTransform(mo.MMALPythonComponent):
         This method will be called for every frame passing through the
         transform.  The *source* and *target* parameters represent buffers from
         the input and output ports of the transform respectively. They will be
-        derivatives of :class:`~picamera.mmalobj.MMALBuffer` which return a
+        derivatives of :class:`~picamerax.mmalobj.MMALBuffer` which return a
         3-dimensional numpy array when used as context managers. For example::
 
             def transform(self, source, target):

@@ -40,7 +40,7 @@ str = type('')
 import warnings
 from collections import namedtuple
 
-from picamera.exc import (
+from picamerax.exc import (
     mmal_check,
     PiCameraError,
     PiCameraMMALError,
@@ -150,7 +150,7 @@ class PiVideoFrame(namedtuple('PiVideoFrame', (
         .. warning::
 
             Currently, the camera occasionally returns "time unknown" values in
-            this field. In this case, picamera will simply re-use the timestamp
+            this field. In this case, picamerax will simply re-use the timestamp
             of the previous frame (under the assumption that time never goes
             backwards). This happens for SPS header "frames", for example.
 

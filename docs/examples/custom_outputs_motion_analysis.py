@@ -1,8 +1,8 @@
-import picamera
-import picamera.array
+import picamerax
+import picamerax.array
 import numpy as np
 
-class MyMotionDetector(picamera.array.PiMotionAnalysis):
+class MyMotionDetector(picamerax.array.PiMotionAnalysis):
     def analyse(self, a):
         a = np.sqrt(
             np.square(a['x'].astype(np.float)) +
@@ -13,7 +13,7 @@ class MyMotionDetector(picamera.array.PiMotionAnalysis):
         if (a > 60).sum() > 10:
             print('Motion detected!')
 
-with picamera.PiCamera() as camera:
+with picamerax.PiCamera() as camera:
     camera.resolution = (640, 480)
     camera.framerate = 30
     camera.start_recording(

@@ -1,6 +1,6 @@
-import picamera
+import picamerax
 
-camera = picamera.PiCamera(resolution=(640, 480))
+camera = picamerax.PiCamera(resolution=(640, 480))
 camera.start_recording('1.h264')
 camera.wait_recording(5)
 for i in range(2, 11):

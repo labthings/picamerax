@@ -11,7 +11,7 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-283 630,-283 630,4 -4,4"/>
 <!-- PiEncoder -->
 <g id="node1" class="node"><title>PiEncoder</title>
-<g id="a_node1"><a xlink:href="../api.html#picamera.PiEncoder" xlink:title="PiEncoder" target="_top">
+<g id="a_node1"><a xlink:href="../api.html#picamerax.PiEncoder" xlink:title="PiEncoder" target="_top">
 <polygon fill="#9ec6e0" stroke="#9ec6e0" points="75,-144 0,-144 0,-108 75,-108 75,-144"/>
 <text text-anchor="middle" x="37.5" y="-122.9" font-family="Sans" font-size="12.00" fill="#000000">PiEncoder</text>
 </a>
@@ -19,7 +19,7 @@
 </g>
 <!-- PiImageEncoder -->
 <g id="node2" class="node"><title>PiImageEncoder</title>
-<g id="a_node2"><a xlink:href="../api.html#picamera.PiImageEncoder" xlink:title="PiImageEncoder" target="_top">
+<g id="a_node2"><a xlink:href="../api.html#picamerax.PiImageEncoder" xlink:title="PiImageEncoder" target="_top">
 <polygon fill="#9ec6e0" stroke="#9ec6e0" points="222,-198 111,-198 111,-162 222,-162 222,-198"/>
 <text text-anchor="middle" x="166.5" y="-176.9" font-family="Sans" font-size="12.00" fill="#000000">PiImageEncoder</text>
 </a>
@@ -32,7 +32,7 @@
 </g>
 <!-- PiVideoEncoder -->
 <g id="node3" class="node"><title>PiVideoEncoder</title>
-<g id="a_node3"><a xlink:href="../api.html#picamera.PiVideoEncoder" xlink:title="PiVideoEncoder" target="_top">
+<g id="a_node3"><a xlink:href="../api.html#picamerax.PiVideoEncoder" xlink:title="PiVideoEncoder" target="_top">
 <polygon fill="#9ec6e0" stroke="#9ec6e0" points="220,-90 113,-90 113,-54 220,-54 220,-90"/>
 <text text-anchor="middle" x="166.5" y="-68.9" font-family="Sans" font-size="12.00" fill="#000000">PiVideoEncoder</text>
 </a>
@@ -45,7 +45,7 @@
 </g>
 <!-- PiOneImageEncoder -->
 <g id="node4" class="node"><title>PiOneImageEncoder</title>
-<g id="a_node4"><a xlink:href="../api.html#picamera.PiOneImageEncoder" xlink:title="PiOneImageEncoder" target="_top">
+<g id="a_node4"><a xlink:href="../api.html#picamerax.PiOneImageEncoder" xlink:title="PiOneImageEncoder" target="_top">
 <polygon fill="#9ec6e0" stroke="#9ec6e0" points="401,-144 266,-144 266,-108 401,-108 401,-144"/>
 <text text-anchor="middle" x="333.5" y="-122.9" font-family="Sans" font-size="12.00" fill="#000000">PiOneImageEncoder</text>
 </a>
@@ -58,7 +58,7 @@
 </g>
 <!-- PiMultiImageEncoder -->
 <g id="node5" class="node"><title>PiMultiImageEncoder</title>
-<g id="a_node5"><a xlink:href="../api.html#picamera.PiMultiImageEncoder" xlink:title="PiMultiImageEncoder" target="_top">
+<g id="a_node5"><a xlink:href="../api.html#picamerax.PiMultiImageEncoder" xlink:title="PiMultiImageEncoder" target="_top">
 <polygon fill="#9ec6e0" stroke="#9ec6e0" points="402,-252 265,-252 265,-216 402,-216 402,-252"/>
 <text text-anchor="middle" x="333.5" y="-230.9" font-family="Sans" font-size="12.00" fill="#000000">PiMultiImageEncoder</text>
 </a>
@@ -71,7 +71,7 @@
 </g>
 <!-- PiRawMixin -->
 <g id="node6" class="node"><title>PiRawMixin</title>
-<g id="a_node6"><a xlink:href="../api.html#picamera.PiRawMixin" xlink:title="PiRawMixin" target="_top">
+<g id="a_node6"><a xlink:href="../api.html#picamerax.PiRawMixin" xlink:title="PiRawMixin" target="_top">
 <polygon fill="#9ec6e0" stroke="#9ec6e0" points="206.5,-144 126.5,-144 126.5,-108 206.5,-108 206.5,-144"/>
 <text text-anchor="middle" x="166.5" y="-122.9" font-family="Sans" font-size="12.00" fill="#000000">PiRawMixin</text>
 </a>
@@ -84,7 +84,7 @@
 </g>
 <!-- PiRawImageMixin -->
 <g id="node7" class="node"><title>PiRawImageMixin</title>
-<g id="a_node7"><a xlink:href="../api.html#picamera.PiRawImageMixin" xlink:title="PiRawImageMixin" target="_top">
+<g id="a_node7"><a xlink:href="../api.html#picamerax.PiRawImageMixin" xlink:title="PiRawImageMixin" target="_top">
 <polygon fill="#9ec6e0" stroke="#9ec6e0" points="391.5,-198 275.5,-198 275.5,-162 391.5,-162 391.5,-198"/>
 <text text-anchor="middle" x="333.5" y="-176.9" font-family="Sans" font-size="12.00" fill="#000000">PiRawImageMixin</text>
 </a>
@@ -102,7 +102,7 @@
 </g>
 <!-- PiRawOneImageEncoder -->
 <g id="node8" class="node"><title>PiRawOneImageEncoder</title>
-<g id="a_node8"><a xlink:href="../api.html#picamera.PiRawOneImageEncoder" xlink:title="PiRawOneImageEncoder" target="_top">
+<g id="a_node8"><a xlink:href="../api.html#picamerax.PiRawOneImageEncoder" xlink:title="PiRawOneImageEncoder" target="_top">
 <polygon fill="#2980b9" stroke="#2980b9" points="615.5,-171 455.5,-171 455.5,-135 615.5,-135 615.5,-171"/>
 <text text-anchor="middle" x="535.5" y="-149.9" font-family="Sans" font-size="12.00" fill="#ffffff">PiRawOneImageEncoder</text>
 </a>
@@ -120,7 +120,7 @@
 </g>
 <!-- PiRawMultiImageEncoder -->
 <g id="node9" class="node"><title>PiRawMultiImageEncoder</title>
-<g id="a_node9"><a xlink:href="../api.html#picamera.PiRawMultiImageEncoder" xlink:title="PiRawMultiImageEncoder" target="_top">
+<g id="a_node9"><a xlink:href="../api.html#picamerax.PiRawMultiImageEncoder" xlink:title="PiRawMultiImageEncoder" target="_top">
 <polygon fill="#2980b9" stroke="#2980b9" points="616.5,-225 454.5,-225 454.5,-189 616.5,-189 616.5,-225"/>
 <text text-anchor="middle" x="535.5" y="-203.9" font-family="Sans" font-size="12.00" fill="#ffffff">PiRawMultiImageEncoder</text>
 </a>
@@ -138,7 +138,7 @@
 </g>
 <!-- PiRawVideoEncoder -->
 <g id="node10" class="node"><title>PiRawVideoEncoder</title>
-<g id="a_node10"><a xlink:href="../api.html#picamera.PiRawVideoEncoder" xlink:title="PiRawVideoEncoder" target="_top">
+<g id="a_node10"><a xlink:href="../api.html#picamerax.PiRawVideoEncoder" xlink:title="PiRawVideoEncoder" target="_top">
 <polygon fill="#2980b9" stroke="#2980b9" points="399.5,-90 267.5,-90 267.5,-54 399.5,-54 399.5,-90"/>
 <text text-anchor="middle" x="333.5" y="-68.9" font-family="Sans" font-size="12.00" fill="#ffffff">PiRawVideoEncoder</text>
 </a>
@@ -156,7 +156,7 @@
 </g>
 <!-- PiCookedOneImageEncoder -->
 <g id="node11" class="node"><title>PiCookedOneImageEncoder</title>
-<g id="a_node11"><a xlink:href="../api.html#picamera.PiCookedOneImageEncoder" xlink:title="PiCookedOneImageEncoder" target="_top">
+<g id="a_node11"><a xlink:href="../api.html#picamerax.PiCookedOneImageEncoder" xlink:title="PiCookedOneImageEncoder" target="_top">
 <polygon fill="#2980b9" stroke="#2980b9" points="625,-117 446,-117 446,-81 625,-81 625,-117"/>
 <text text-anchor="middle" x="535.5" y="-95.9" font-family="Sans" font-size="12.00" fill="#ffffff">PiCookedOneImageEncoder</text>
 </a>
@@ -169,7 +169,7 @@
 </g>
 <!-- PiCookedMultiImageEncoder -->
 <g id="node12" class="node"><title>PiCookedMultiImageEncoder</title>
-<g id="a_node12"><a xlink:href="../api.html#picamera.PiCookedMultiImageEncoder" xlink:title="PiCookedMultiImageEncoder" target="_top">
+<g id="a_node12"><a xlink:href="../api.html#picamerax.PiCookedMultiImageEncoder" xlink:title="PiCookedMultiImageEncoder" target="_top">
 <polygon fill="#2980b9" stroke="#2980b9" points="626,-279 445,-279 445,-243 626,-243 626,-279"/>
 <text text-anchor="middle" x="535.5" y="-257.9" font-family="Sans" font-size="12.00" fill="#ffffff">PiCookedMultiImageEncoder</text>
 </a>
@@ -182,7 +182,7 @@
 </g>
 <!-- PiCookedVideoEncoder -->
 <g id="node13" class="node"><title>PiCookedVideoEncoder</title>
-<g id="a_node13"><a xlink:href="../api.html#picamera.PiCookedVideoEncoder" xlink:title="PiCookedVideoEncoder" target="_top">
+<g id="a_node13"><a xlink:href="../api.html#picamerax.PiCookedVideoEncoder" xlink:title="PiCookedVideoEncoder" target="_top">
 <polygon fill="#2980b9" stroke="#2980b9" points="409,-36 258,-36 258,-0 409,-0 409,-36"/>
 <text text-anchor="middle" x="333.5" y="-14.9" font-family="Sans" font-size="12.00" fill="#ffffff">PiCookedVideoEncoder</text>
 </a>

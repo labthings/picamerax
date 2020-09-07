@@ -1,6 +1,6 @@
-import picamera
+import picamerax
 
-camera = picamera.PiCamera()
+camera = picamerax.PiCamera()
 # Turn the camera's LED off
 camera.led = False
 # Take a picture while the LED remains off

@@ -5,22 +5,22 @@ digraph G {
 
     /* Abstract classes */
     node [color="#9ec6e0",fontcolor="#000000"];
-    PiEncoder           [target="_top", URL="../api.html#picamera.PiEncoder"];
-    PiImageEncoder      [target="_top", URL="../api.html#picamera.PiImageEncoder"];
-    PiVideoEncoder      [target="_top", URL="../api.html#picamera.PiVideoEncoder"];
-    PiOneImageEncoder   [target="_top", URL="../api.html#picamera.PiOneImageEncoder"];
-    PiMultiImageEncoder [target="_top", URL="../api.html#picamera.PiMultiImageEncoder"];
-    PiRawMixin          [target="_top", URL="../api.html#picamera.PiRawMixin"];
-    PiRawImageMixin     [target="_top", URL="../api.html#picamera.PiRawImageMixin"];
+    PiEncoder           [target="_top", URL="../api.html#picamerax.PiEncoder"];
+    PiImageEncoder      [target="_top", URL="../api.html#picamerax.PiImageEncoder"];
+    PiVideoEncoder      [target="_top", URL="../api.html#picamerax.PiVideoEncoder"];
+    PiOneImageEncoder   [target="_top", URL="../api.html#picamerax.PiOneImageEncoder"];
+    PiMultiImageEncoder [target="_top", URL="../api.html#picamerax.PiMultiImageEncoder"];
+    PiRawMixin          [target="_top", URL="../api.html#picamerax.PiRawMixin"];
+    PiRawImageMixin     [target="_top", URL="../api.html#picamerax.PiRawImageMixin"];
 
     /* Concrete classes */
     node [color="#2980b9",fontcolor="#ffffff"];
-    PiRawOneImageEncoder      [target="_top", URL="../api.html#picamera.PiRawOneImageEncoder"];
-    PiRawMultiImageEncoder    [target="_top", URL="../api.html#picamera.PiRawMultiImageEncoder"];
-    PiRawVideoEncoder         [target="_top", URL="../api.html#picamera.PiRawVideoEncoder"];
-    PiCookedOneImageEncoder   [target="_top", URL="../api.html#picamera.PiCookedOneImageEncoder"];
-    PiCookedMultiImageEncoder [target="_top", URL="../api.html#picamera.PiCookedMultiImageEncoder"];
-    PiCookedVideoEncoder      [target="_top", URL="../api.html#picamera.PiCookedVideoEncoder"];
+    PiRawOneImageEncoder      [target="_top", URL="../api.html#picamerax.PiRawOneImageEncoder"];
+    PiRawMultiImageEncoder    [target="_top", URL="../api.html#picamerax.PiRawMultiImageEncoder"];
+    PiRawVideoEncoder         [target="_top", URL="../api.html#picamerax.PiRawVideoEncoder"];
+    PiCookedOneImageEncoder   [target="_top", URL="../api.html#picamerax.PiCookedOneImageEncoder"];
+    PiCookedMultiImageEncoder [target="_top", URL="../api.html#picamerax.PiCookedMultiImageEncoder"];
+    PiCookedVideoEncoder      [target="_top", URL="../api.html#picamerax.PiCookedVideoEncoder"];
 
     PiImageEncoder->PiEncoder;
     PiVideoEncoder->PiEncoder;

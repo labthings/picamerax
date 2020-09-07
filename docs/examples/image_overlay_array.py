@@ -1,5 +1,5 @@
 import time
-import picamera
+import picamerax
 import numpy as np
 
 # Create an array representing a 1280x720 image of
@@ -9,7 +9,7 @@ a = np.zeros((720, 1280, 3), dtype=np.uint8)
 a[360, :, :] = 0xff
 a[:, 640, :] = 0xff
 
-camera = picamera.PiCamera()
+camera = picamerax.PiCamera()
 camera.resolution = (1280, 720)
 camera.framerate = 24
 camera.start_preview()

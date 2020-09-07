@@ -1,14 +1,14 @@
 from __future__ import division
 
 import time
-import picamera
+import picamerax
 import numpy as np
 
 width = 100
 height = 100
 stream = open('image.data', 'w+b')
 # Capture the image in YUV format
-with picamera.PiCamera() as camera:
+with picamerax.PiCamera() as camera:
     camera.resolution = (width, height)
     camera.start_preview()
     time.sleep(2)

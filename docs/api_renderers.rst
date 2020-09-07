@@ -4,7 +4,7 @@
 API - Renderers
 ===============
 
-.. currentmodule:: picamera
+.. currentmodule:: picamerax
 
 Renderers are used by the camera to provide preview and overlay functionality
 on the Pi's display. Users will rarely need to construct instances of these

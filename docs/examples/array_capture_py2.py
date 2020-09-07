@@ -1,8 +1,8 @@
 import time
-import picamera
+import picamerax
 import numpy as np
 
-with picamera.PiCamera() as camera:
+with picamerax.PiCamera() as camera:
     camera.resolution = (100, 100)
     camera.framerate = 24
     time.sleep(2)

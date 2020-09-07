@@ -528,7 +528,7 @@ class PiRawMixin(PiEncoder):
         # Workaround (#83): when the resizer is used the width must be aligned
         # (both the frame and crop values) to avoid an error when the output
         # port format is set (height is aligned too, simply for consistency
-        # with old picamera versions). Warn the user as they're not going to
+        # with old picamerax versions). Warn the user as they're not going to
         # get the resolution they expect
         if not resize and format != 'yuv' and input_port.name.startswith('vc.ril.video_splitter'):
             # Workaround: Expected frame size is rounded to 16x16 when splitter

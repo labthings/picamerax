@@ -4,20 +4,20 @@
 Change log
 ==========
 
-.. currentmodule:: picamera
+.. currentmodule:: picamerax
 
 
 Release 1.13 (2017-02-25)
 =========================
 
 1.13 includes numerous bug fixes and several major enhancements, mostly in the
-:mod:`~picamera.mmalobj` layer:
+:mod:`~picamerax.mmalobj` layer:
 
 * 10 second captures should now work with the V2 module as the default
   ``CAPTURE_TIMEOUT`` has been increased to 60 seconds (`#284`_)
 * A bug in :meth:`~PiCameraCircularIO.copy_to` caused it to copy nothing when
   it encountered "unknown" timestamps in the stream (`#302`_, `#319`_, `#357`_)
-* A silly typo in code used by :class:`~picamera.array.PiRGBArray` was fixed
+* A silly typo in code used by :class:`~picamerax.array.PiRGBArray` was fixed
   (`#321`_)
 * A bug in :meth:`~PiCamera.capture_continuous` which caused duplicate frames
   in the output was fixed (`#311`_)
@@ -29,8 +29,8 @@ Release 1.13 (2017-02-25)
 * Fixed a rare race condition that occurred when multiple splitter ports were
   in use (`#344`_)
 * Recording overlays is now possible, but currently requires using the lower
-  level :mod:`~picamera.mmalobj` layer (`#196`_)
-* Capturing YUV arrays via :class:`~picamera.array.PiYUVArray` is faster,
+  level :mod:`~picamerax.mmalobj` layer (`#196`_)
+* Capturing YUV arrays via :class:`~picamerax.array.PiYUVArray` is faster,
   thanks to GitHub user goosst (`#308`_)
 * Added the ability to specify a restart interval for JPEG encoding (`#369`_)
 * Added a property allowing users to manually specify a
@@ -54,22 +54,22 @@ Substantial work has also gone into improving the documentation. In particular:
   documentation. These should now be much more useable in hard-copy and on
   e-readers
 
-.. _#196: https://github.com/waveform80/picamera/issues/196
-.. _#199: https://github.com/waveform80/picamera/issues/199
-.. _#284: https://github.com/waveform80/picamera/issues/284
-.. _#302: https://github.com/waveform80/picamera/issues/302
-.. _#308: https://github.com/waveform80/picamera/issues/308
-.. _#311: https://github.com/waveform80/picamera/issues/311
-.. _#315: https://github.com/waveform80/picamera/issues/315
-.. _#319: https://github.com/waveform80/picamera/issues/319
-.. _#321: https://github.com/waveform80/picamera/issues/321
-.. _#324: https://github.com/waveform80/picamera/issues/324
-.. _#337: https://github.com/waveform80/picamera/issues/337
-.. _#344: https://github.com/waveform80/picamera/issues/344
-.. _#357: https://github.com/waveform80/picamera/issues/357
-.. _#369: https://github.com/waveform80/picamera/issues/369
-.. _#374: https://github.com/waveform80/picamera/issues/374
-.. _#375: https://github.com/waveform80/picamera/issues/375
+.. _#196: https://github.com/waveform80/picamerax/issues/196
+.. _#199: https://github.com/waveform80/picamerax/issues/199
+.. _#284: https://github.com/waveform80/picamerax/issues/284
+.. _#302: https://github.com/waveform80/picamerax/issues/302
+.. _#308: https://github.com/waveform80/picamerax/issues/308
+.. _#311: https://github.com/waveform80/picamerax/issues/311
+.. _#315: https://github.com/waveform80/picamerax/issues/315
+.. _#319: https://github.com/waveform80/picamerax/issues/319
+.. _#321: https://github.com/waveform80/picamerax/issues/321
+.. _#324: https://github.com/waveform80/picamerax/issues/324
+.. _#337: https://github.com/waveform80/picamerax/issues/337
+.. _#344: https://github.com/waveform80/picamerax/issues/344
+.. _#357: https://github.com/waveform80/picamerax/issues/357
+.. _#369: https://github.com/waveform80/picamerax/issues/369
+.. _#374: https://github.com/waveform80/picamerax/issues/374
+.. _#375: https://github.com/waveform80/picamerax/issues/375
 
 
 Release 1.12 (2016-07-03)
@@ -79,19 +79,19 @@ Release 1.12 (2016-07-03)
 
 * Fixed issue with unencoded captures in Python 3 (`#297`_)
 * Fixed several Python 3 bytes/unicode issues that were related to `#297`_ (I'd
-  erroneously run the picamera test suite twice against Python 2 instead of 2
+  erroneously run the picamerax test suite twice against Python 2 instead of 2
   and 3 when releasing 1.11, which is how these snuck in)
 * Fixed multi-dimensional arrays for overlays under Python 3
 * Finished alternate CIE constructors for the :class:`Color` class
 
-.. _#297: https://github.com/waveform80/picamera/issues/297
+.. _#297: https://github.com/waveform80/picamerax/issues/297
 
 
 Release 1.11 (2016-06-19)
 =========================
 
 1.11 on the surface consists mostly of enhancements, but underneath
-includes a major re-write of picamera's core:
+includes a major re-write of picamerax's core:
 
 * Direct capture to buffer-protocol objects, such as numpy arrays
   (`#241`_)
@@ -128,18 +128,18 @@ Many thanks to the community, and especially thanks to 6by9 (one of the
 firmware developers) who's fielded seemingly endless questions and
 requests from me in the last couple of months!
 
-.. _#241: https://github.com/waveform80/picamera/issues/241
-.. _#257: https://github.com/waveform80/picamera/issues/257
-.. _#212: https://github.com/waveform80/picamera/issues/212
-.. _#279: https://github.com/waveform80/picamera/pull/279
-.. _#216: https://github.com/waveform80/picamera/issues/216
-.. _#240: https://github.com/waveform80/picamera/issues/240
-.. _#218: https://github.com/waveform80/picamera/issues/218
-.. _#228: https://github.com/waveform80/picamera/issues/228
-.. _#236: https://github.com/waveform80/picamera/issues/236
-.. _#264: https://github.com/waveform80/picamera/issues/264
-.. _#281: https://github.com/waveform80/picamera/issues/281
-.. _#296: https://github.com/waveform80/picamera/issues/296
+.. _#241: https://github.com/waveform80/picamerax/issues/241
+.. _#257: https://github.com/waveform80/picamerax/issues/257
+.. _#212: https://github.com/waveform80/picamerax/issues/212
+.. _#279: https://github.com/waveform80/picamerax/pull/279
+.. _#216: https://github.com/waveform80/picamerax/issues/216
+.. _#240: https://github.com/waveform80/picamerax/issues/240
+.. _#218: https://github.com/waveform80/picamerax/issues/218
+.. _#228: https://github.com/waveform80/picamerax/issues/228
+.. _#236: https://github.com/waveform80/picamerax/issues/236
+.. _#264: https://github.com/waveform80/picamerax/issues/264
+.. _#281: https://github.com/waveform80/picamerax/issues/281
+.. _#296: https://github.com/waveform80/picamerax/issues/296
 
 
 Release 1.10 (2015-03-31)
@@ -165,11 +165,11 @@ Release 1.10 (2015-03-31)
 * Finally, the API documentation has been re-worked as it was getting too
   large to comfortably load on all platforms (no ticket)
 
-.. _#184: https://github.com/waveform80/picamera/issues/184
-.. _#193: https://github.com/waveform80/picamera/issues/193
-.. _#198: https://github.com/waveform80/picamera/issues/198
-.. _#203: https://github.com/waveform80/picamera/issues/203
-.. _#204: https://github.com/waveform80/picamera/issues/204
+.. _#184: https://github.com/waveform80/picamerax/issues/184
+.. _#193: https://github.com/waveform80/picamerax/issues/193
+.. _#198: https://github.com/waveform80/picamerax/issues/198
+.. _#203: https://github.com/waveform80/picamerax/issues/203
+.. _#204: https://github.com/waveform80/picamerax/issues/204
 
 
 Release 1.9 (2015-01-01)
@@ -204,20 +204,20 @@ Release 1.9 (2015-01-01)
 Many thanks to the community for providing several of these fixes as pull
 requests, and thanks for all the great bug reports. Happy new year everyone!
 
-.. _#47: https://github.com/waveform80/picamera/issues/47
-.. _#165: https://github.com/waveform80/picamera/issues/165
-.. _#166: https://github.com/waveform80/picamera/issues/166
-.. _#167: https://github.com/waveform80/picamera/issues/167
-.. _#168: https://github.com/waveform80/picamera/issues/168
-.. _#170: https://github.com/waveform80/picamera/issues/170
-.. _#171: https://github.com/waveform80/picamera/issues/171
-.. _#172: https://github.com/waveform80/picamera/pull/172
-.. _#174: https://github.com/waveform80/picamera/issues/174
-.. _#176: https://github.com/waveform80/picamera/pull/176
-.. _#177: https://github.com/waveform80/picamera/issues/177
-.. _#179: https://github.com/waveform80/picamera/pull/179
-.. _#180: https://github.com/waveform80/picamera/issues/180
-.. _#182: https://github.com/waveform80/picamera/issues/182
+.. _#47: https://github.com/waveform80/picamerax/issues/47
+.. _#165: https://github.com/waveform80/picamerax/issues/165
+.. _#166: https://github.com/waveform80/picamerax/issues/166
+.. _#167: https://github.com/waveform80/picamerax/issues/167
+.. _#168: https://github.com/waveform80/picamerax/issues/168
+.. _#170: https://github.com/waveform80/picamerax/issues/170
+.. _#171: https://github.com/waveform80/picamerax/issues/171
+.. _#172: https://github.com/waveform80/picamerax/pull/172
+.. _#174: https://github.com/waveform80/picamerax/issues/174
+.. _#176: https://github.com/waveform80/picamerax/pull/176
+.. _#177: https://github.com/waveform80/picamerax/issues/177
+.. _#179: https://github.com/waveform80/picamerax/pull/179
+.. _#180: https://github.com/waveform80/picamerax/issues/180
+.. _#182: https://github.com/waveform80/picamerax/issues/182
 
 
 Release 1.8 (2014-09-05)
@@ -255,14 +255,14 @@ Release 1.8 (2014-09-05)
 * Finally, the confusingly named :attr:`~PiCamera.crop` attribute was changed
   to a deprecated alias for the new :attr:`~PiCamera.zoom` attribute (`#146`_)
 
-.. _#135: https://github.com/waveform80/picamera/issues/135
-.. _#143: https://github.com/waveform80/picamera/issues/143
-.. _#144: https://github.com/waveform80/picamera/issues/144
-.. _#146: https://github.com/waveform80/picamera/issues/146
-.. _#149: https://github.com/waveform80/picamera/issues/149
-.. _#153: https://github.com/waveform80/picamera/issues/153
-.. _#154: https://github.com/waveform80/picamera/issues/154
-.. _#160: https://github.com/waveform80/picamera/issues/160
+.. _#135: https://github.com/waveform80/picamerax/issues/135
+.. _#143: https://github.com/waveform80/picamerax/issues/143
+.. _#144: https://github.com/waveform80/picamerax/issues/144
+.. _#146: https://github.com/waveform80/picamerax/issues/146
+.. _#149: https://github.com/waveform80/picamerax/issues/149
+.. _#153: https://github.com/waveform80/picamerax/issues/153
+.. _#154: https://github.com/waveform80/picamerax/issues/154
+.. _#160: https://github.com/waveform80/picamerax/issues/160
 
 
 Release 1.7 (2014-08-08)
@@ -281,7 +281,7 @@ Release 1.7 (2014-08-08)
   automatically included in the documentation (`#130`_)
 * Support for unencoded formats (YUV, RGB, etc.) has been added to the
   :meth:`~PiCamera.start_recording` method (`#132`_)
-* A couple of analysis classes have been added to :mod:`picamera.array` to
+* A couple of analysis classes have been added to :mod:`picamerax.array` to
   support the new unencoded recording formats (`#139`_)
 * Several issues in the :class:`~PiBayerArray` class were fixed; this should
   now work correctly with Python 3, and the :meth:`~PiBayerArray.demosaic`
@@ -295,16 +295,16 @@ Once again, many thanks to the community for another round of excellent bug
 reports - and many thanks to 6by9 and jamesh for their excellent work on the
 firmware and official utilities!
 
-.. _#16: https://github.com/waveform80/picamera/issues/16
-.. _#84: https://github.com/waveform80/picamera/issues/84
-.. _#116: https://github.com/waveform80/picamera/issues/116
-.. _#128: https://github.com/waveform80/picamera/issues/128
-.. _#130: https://github.com/waveform80/picamera/issues/130
-.. _#132: https://github.com/waveform80/picamera/issues/132
-.. _#133: https://github.com/waveform80/picamera/issues/133
-.. _#134: https://github.com/waveform80/picamera/issues/134
-.. _#136: https://github.com/waveform80/picamera/issues/136
-.. _#139: https://github.com/waveform80/picamera/issues/139
+.. _#16: https://github.com/waveform80/picamerax/issues/16
+.. _#84: https://github.com/waveform80/picamerax/issues/84
+.. _#116: https://github.com/waveform80/picamerax/issues/116
+.. _#128: https://github.com/waveform80/picamerax/issues/128
+.. _#130: https://github.com/waveform80/picamerax/issues/130
+.. _#132: https://github.com/waveform80/picamerax/issues/132
+.. _#133: https://github.com/waveform80/picamerax/issues/133
+.. _#134: https://github.com/waveform80/picamerax/issues/134
+.. _#136: https://github.com/waveform80/picamerax/issues/136
+.. _#139: https://github.com/waveform80/picamerax/issues/139
 
 
 Release 1.6 (2014-07-21)
@@ -337,22 +337,22 @@ Release 1.6 (2014-07-21)
   circular I/O stream class. This has now been rectified by adding a
   *splitter_port* parameter to the constructor of :class:`~PiCameraCircularIO`
   (`#109`_)
-* Similarly, the :mod:`array extensions <picamera.array>` introduced in 1.5
+* Similarly, the :mod:`array extensions <picamerax.array>` introduced in 1.5
   failed to work when resizers were present in the pipeline. This has been
   fixed by adding a `size` parameter to the constructor of all the custom
   output classes defined in that module (`#121`_)
-* A bug that caused picamera to fail when the display was disabled has been
+* A bug that caused picamerax to fail when the display was disabled has been
   squashed (`#120`_)
 
 As always, many thanks to the community for another great set of bug reports!
 
-.. _#98: https://github.com/waveform80/picamera/issues/98
-.. _#109: https://github.com/waveform80/picamera/issues/109
-.. _#110: https://github.com/waveform80/picamera/issues/110
-.. _#115: https://github.com/waveform80/picamera/issues/115
-.. _#117: https://github.com/waveform80/picamera/issues/117
-.. _#120: https://github.com/waveform80/picamera/issues/120
-.. _#121: https://github.com/waveform80/picamera/issues/121
+.. _#98: https://github.com/waveform80/picamerax/issues/98
+.. _#109: https://github.com/waveform80/picamerax/issues/109
+.. _#110: https://github.com/waveform80/picamerax/issues/110
+.. _#115: https://github.com/waveform80/picamerax/issues/115
+.. _#117: https://github.com/waveform80/picamerax/issues/117
+.. _#120: https://github.com/waveform80/picamerax/issues/120
+.. _#121: https://github.com/waveform80/picamerax/issues/121
 
 
 Release 1.5 (2014-06-11)
@@ -361,7 +361,7 @@ Release 1.5 (2014-06-11)
 1.5 fixed several bugs and introduced a couple of major new pieces of
 functionality:
 
-* The new :mod:`picamera.array` module provides a series of custom output
+* The new :mod:`picamerax.array` module provides a series of custom output
   classes which can be used to easily obtain numpy arrays from a variety of
   sources (`#107`_)
 * The *motion_output* parameter was added to :meth:`~PiCamera.start_recording`
@@ -378,17 +378,17 @@ functionality:
   alpha-inclusive modes like RGBA has been removed as a result (`#103`_)
 * An issue with out-of-order calls to :meth:`~PiCamera.stop_recording` when
   multiple recordings were active was resolved (`#105`_)
-* Finally, picamera caught up with raspistill and raspivid by offering a
+* Finally, picamerax caught up with raspistill and raspivid by offering a
   friendly error message when used with a disabled camera - thanks to Andrew
   Scheller (lurch) for the suggestion! (`#89`_)
 
-.. _#89: https://github.com/waveform80/picamera/issues/89
-.. _#94: https://github.com/waveform80/picamera/issues/94
-.. _#95: https://github.com/waveform80/picamera/issues/95
-.. _#97: https://github.com/waveform80/picamera/issues/97
-.. _#103: https://github.com/waveform80/picamera/issues/103
-.. _#105: https://github.com/waveform80/picamera/issues/105
-.. _#107: https://github.com/waveform80/picamera/issues/107
+.. _#89: https://github.com/waveform80/picamerax/issues/89
+.. _#94: https://github.com/waveform80/picamerax/issues/94
+.. _#95: https://github.com/waveform80/picamerax/issues/95
+.. _#97: https://github.com/waveform80/picamerax/issues/97
+.. _#103: https://github.com/waveform80/picamerax/issues/103
+.. _#105: https://github.com/waveform80/picamerax/issues/105
+.. _#107: https://github.com/waveform80/picamerax/issues/107
 
 
 Release 1.4 (2014-05-06)
@@ -403,7 +403,7 @@ Release 1.4 (2014-05-06)
   of the auto-white-balance red/blue gains (`#74`_)
 * A bug which cause :meth:`~PiCamera.split_recording` to fail when low
   framerates were configured was fixed (`#87`_)
-* A bug which caused picamera to fail when used in UNIX-style daemons, unless
+* A bug which caused picamerax to fail when used in UNIX-style daemons, unless
   the module was imported *after* the double-fork to background was fixed
   (`#85`_)
 * A bug which caused the :attr:`~PiCamera.frame` attribute to fail when queried
@@ -420,13 +420,13 @@ Known issues:
 
 Many thanks to the community for yet more excellent quality bug reports!
 
-.. _#73: https://github.com/waveform80/picamera/issues/73
-.. _#74: https://github.com/waveform80/picamera/issues/74
-.. _#77: https://github.com/waveform80/picamera/issues/77
-.. _#80: https://github.com/waveform80/picamera/issues/80
-.. _#83: https://github.com/waveform80/picamera/issues/83
-.. _#85: https://github.com/waveform80/picamera/issues/85
-.. _#87: https://github.com/waveform80/picamera/issues/87
+.. _#73: https://github.com/waveform80/picamerax/issues/73
+.. _#74: https://github.com/waveform80/picamerax/issues/74
+.. _#77: https://github.com/waveform80/picamerax/issues/77
+.. _#80: https://github.com/waveform80/picamerax/issues/80
+.. _#83: https://github.com/waveform80/picamerax/issues/83
+.. _#85: https://github.com/waveform80/picamerax/issues/85
+.. _#87: https://github.com/waveform80/picamerax/issues/87
 
 
 Release 1.3 (2014-03-22)
@@ -453,12 +453,12 @@ And partly bug fixes:
 * Raw captures with :meth:`~PiCamera.capture_continuous` and
   :meth:`~PiCamera.capture_sequence` were broken (`#55`_)
 
-.. _#52: https://github.com/waveform80/picamera/issues/52
-.. _#53: https://github.com/waveform80/picamera/issues/53
-.. _#55: https://github.com/waveform80/picamera/issues/55
-.. _#56: https://github.com/waveform80/picamera/issues/56
-.. _#59: https://github.com/waveform80/picamera/issues/59
-.. _#65: https://github.com/waveform80/picamera/issues/65
+.. _#52: https://github.com/waveform80/picamerax/issues/52
+.. _#53: https://github.com/waveform80/picamerax/issues/53
+.. _#55: https://github.com/waveform80/picamerax/issues/55
+.. _#56: https://github.com/waveform80/picamerax/issues/56
+.. _#59: https://github.com/waveform80/picamerax/issues/59
+.. _#65: https://github.com/waveform80/picamerax/issues/65
 
 
 Release 1.2 (2014-02-02)
@@ -475,9 +475,9 @@ Release 1.2 (2014-02-02)
   although this probably won't find use until OpenGL overlays are explored
   (`#48`_)
 
-.. _#23: https://github.com/waveform80/picamera/issues/23
-.. _#48: https://github.com/waveform80/picamera/issues/48
-.. _#49: https://github.com/waveform80/picamera/issues/49
+.. _#23: https://github.com/waveform80/picamerax/issues/23
+.. _#48: https://github.com/waveform80/picamerax/issues/48
+.. _#49: https://github.com/waveform80/picamerax/issues/49
 
 
 Release 1.1 (2014-01-25)
@@ -491,10 +491,10 @@ Release 1.1 (2014-01-25)
   parameter was fixed (`#46`_)
 * A couple of documentation enhancements made it in (`#41`_ and `#47`_)
 
-.. _#40: https://github.com/waveform80/picamera/issues/40
-.. _#41: https://github.com/waveform80/picamera/pull/41
-.. _#46: https://github.com/waveform80/picamera/issues/46
-.. _#47: https://github.com/waveform80/picamera/issues/47
+.. _#40: https://github.com/waveform80/picamerax/issues/40
+.. _#41: https://github.com/waveform80/picamerax/pull/41
+.. _#46: https://github.com/waveform80/picamerax/issues/46
+.. _#47: https://github.com/waveform80/picamerax/issues/47
 
 
 Release 1.0 (2014-01-11)
@@ -520,7 +520,7 @@ Some bugs were also fixed:
 
 * GPIO.cleanup is no longer called on :meth:`~PiCamera.close` (`#35`_), and
   GPIO set up is only done on first use of the :attr:`~PiCamera.led` attribute
-  which should resolve issues that users have been having with using picamera
+  which should resolve issues that users have been having with using picamerax
   in conjunction with GPIO
 * Raw RGB video-port based image captures are now working again too (`#32`_)
 
@@ -529,14 +529,14 @@ As this is a new major-version, all deprecated elements were removed:
 * The continuous method was removed; this was replaced by
   :meth:`~PiCamera.capture_continuous` in 0.5 (`#7`_)
 
-.. _#7: https://github.com/waveform80/picamera/issues/7
-.. _#12: https://github.com/waveform80/picamera/issues/12
-.. _#21: https://github.com/waveform80/picamera/issues/21
-.. _#32: https://github.com/waveform80/picamera/issues/32
-.. _#34: https://github.com/waveform80/picamera/issues/34
-.. _#35: https://github.com/waveform80/picamera/issues/35
-.. _#36: https://github.com/waveform80/picamera/issues/36
-.. _#39: https://github.com/waveform80/picamera/issues/39
+.. _#7: https://github.com/waveform80/picamerax/issues/7
+.. _#12: https://github.com/waveform80/picamerax/issues/12
+.. _#21: https://github.com/waveform80/picamerax/issues/21
+.. _#32: https://github.com/waveform80/picamerax/issues/32
+.. _#34: https://github.com/waveform80/picamerax/issues/34
+.. _#35: https://github.com/waveform80/picamerax/issues/35
+.. _#36: https://github.com/waveform80/picamerax/issues/36
+.. _#39: https://github.com/waveform80/picamerax/issues/39
 
 
 Release 0.8 (2013-12-09)

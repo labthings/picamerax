@@ -4,7 +4,7 @@
 Basic Recipes
 =============
 
-.. currentmodule:: picamera
+.. currentmodule:: picamerax
 
 The following recipes should be reasonably accessible to Python programmers of
 all skill levels. Please feel free to suggest enhancements or additional
@@ -12,7 +12,7 @@ recipes.
 
 .. warning::
 
-    When trying out these scripts do *not* name your file :file:`picamera.py`.
+    When trying out these scripts do *not* name your file :file:`picamerax.py`.
     Naming scripts after existing Python modules will cause errors when you
     try and import those modules (because Python checks the current directory
     before checking other paths).
@@ -28,7 +28,7 @@ the output of whatever :meth:`~PiCamera.capture` method you require:
 
 .. literalinclude:: examples/file_capture.py
 
-Note that files opened by picamera (as in the case above) will be flushed and
+Note that files opened by picamerax (as in the case above) will be flushed and
 closed so that when the :meth:`~PiCamera.capture` method returns, the data
 should be accessible to other processes.
 
@@ -50,7 +50,7 @@ Note that the format is explicitly specified in the case above. The
 figure out what format to use.
 
 One thing to bear in mind is that (unlike specifying a filename), the stream is
-*not* automatically closed after capture; picamera assumes that since it didn't
+*not* automatically closed after capture; picamerax assumes that since it didn't
 open the stream it can't presume to close it either. However, if the object has
 a ``flush`` method, this will be called prior to capture returning. This should
 ensure that once capture returns the data is accessible to other processes
@@ -297,7 +297,7 @@ Recording to a circular stream
 ==============================
 
 This is similar to :ref:`stream_record` but uses a special kind of in-memory
-stream provided by the picamera library. The :class:`~PiCameraCircularIO` class
+stream provided by the picamerax library. The :class:`~PiCameraCircularIO` class
 implements a `ring buffer`_ based stream, specifically for video recording.
 This enables you to keep an in-memory stream containing the last *n* seconds of
 video recorded (where *n* is determined by the bitrate of the video recording
@@ -415,7 +415,7 @@ Overlaying images on the preview
 ================================
 
 The camera preview system can operate multiple layered renderers
-simultaneously.  While the picamera library only permits a single renderer to
+simultaneously.  While the picamerax library only permits a single renderer to
 be connected to the camera's preview port, it does permit additional renderers
 to be created which display a static image. These overlaid renderers can be
 used to create simple user interfaces.
