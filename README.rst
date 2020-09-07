@@ -25,12 +25,13 @@ This fork will include new features and fixes more rapidly, allowing the latest 
 more experimental software features, to be easily used much earlier than they would otherwise.
 
 Installation
-============
+------------
 
-* pip install picamerax
+.. code-block:: shell
+  pip install picamerax
 
 Links
-=====
+-----
 
 * The code is licensed under the `BSD license`_
 * The `source code`_ can be obtained from GitHub, which also hosts the `bug
@@ -50,10 +51,10 @@ Links
 .. _BSD license: https://opensource.org/licenses/BSD-3-Clause
 
 Developer notes
-===============
+---------------
 
 Why CalVer?
------------
+^^^^^^^^^^^
 
 We want `picamerax` to stay more or less in sync with upstream `picamera`. However, this fork
 adds significant new features that would constitute new version numbers under semantic versioning.
