@@ -54,13 +54,13 @@ Links
 Developer notes
 ---------------
 
-Why CalVer?
-^^^^^^^^^^^
+Why calendar versioning?
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 We want `picamerax` to stay more or less in sync with upstream `picamera`. However, this fork
 adds significant new features that would constitute new version numbers under semantic versioning.
-If we were to adopt SemVer, we would rapidly fall completely out of sync with the upstream version
-numbers. 
+If we were to adopt semantic versioning, we would rapidly fall completely out of sync with the 
+upstream version numbers. 
 
 By using calendar versioning, and clearly tracking new additions to the library, we
 can ensure the upstream base version is obvious (by looking at its release date in relation to 
