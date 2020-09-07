@@ -199,7 +199,7 @@ def test_yuv_analysis1(camera, mode):
             assert a.shape == (resolution[1], resolution[0], 3)
     with YUVTest(camera) as stream:
         camera.start_recording(stream, 'yuv')
-        camera.wait_recording(1)
+        camera.wait_recording(2)
         camera.stop_recording()
         assert stream.write_called
 
@@ -227,7 +227,7 @@ def test_rgb_analysis1(camera, mode):
             assert a.shape == (resolution[1], resolution[0], 3)
     with RGBTest(camera) as stream:
         camera.start_recording(stream, 'rgb')
-        camera.wait_recording(1)
+        camera.wait_recording(2)
         camera.stop_recording()
         assert stream.write_called
 
@@ -257,7 +257,7 @@ def test_motion_analysis1(camera, mode):
             assert a.shape == (height, width)
     with MATest(camera) as stream:
         camera.start_recording('/dev/null', 'h264', motion_output=stream)
-        camera.wait_recording(1)
+        camera.wait_recording(2)
         camera.stop_recording()
         assert stream.write_called
 
@@ -279,7 +279,7 @@ def test_motion_analysis2(camera, mode):
     with MATest(camera, size=resize) as stream:
         camera.start_recording(
             '/dev/null', 'h264', motion_output=stream, resize=resize)
-        camera.wait_recording(1)
+        camera.wait_recording(2)
         camera.stop_recording()
         assert stream.write_called
 
