@@ -24,6 +24,10 @@ features will be unsuitable for inclusion, or face delays.
 This fork will include new features and fixes more rapidly, allowing the latest camera revisions, and
 more experimental software features, to be easily used much earlier than they would otherwise.
 
+Installation
+============
+
+* pip install picamerax
 
 Links
 =====
