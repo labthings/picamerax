@@ -1,8 +1,11 @@
 .. -*- rst -*-
 
-========
-SciPiCamera
-========
+=========
+PiCameraX
+=========
+
+PiCamera + Extras
+-----------------
 
 This package provides a pure Python interface to the `Raspberry Pi`_ `camera`_
 module for Python 3.2 or above, with extra features and fixes.
