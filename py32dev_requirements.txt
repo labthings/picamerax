@@ -1,6 +1,6 @@
 Jinja2==2.10.1
 MarkupSafe==0.15
-Pillow==7.1.0
+Pillow==8.1.1
 Pygments==1.6
 Sphinx==1.2
 coverage==3.7.1
