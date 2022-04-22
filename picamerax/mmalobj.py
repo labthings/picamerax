@@ -1861,7 +1861,7 @@ class MMALQueue(object):
 
     def close(self):
         if self._created:
-            mmal_queue_destroy(self._queue)
+            mmal.mmal_queue_destroy(self._queue)
         self._queue = None
 
     def __len__(self):
