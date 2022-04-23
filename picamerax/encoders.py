@@ -168,7 +168,7 @@ class PiEncoder(object):
     encoder_type = None
 
     def __init__(
-            self, parent, camera_port, input_port, format, resize, **options):
+            self, parent, camera_port, input_port, format, resize, use_isp_resizer=False, **options):
         self.parent = parent
         self.encoder = None
         self.resizer = None
@@ -183,7 +183,7 @@ class PiEncoder(object):
             if parent and parent.closed:
                 raise PiCameraRuntimeError("Camera is closed")
             if resize:
-                self._create_resizer(*mo.to_resolution(resize))
+                self._create_resizer(*mo.to_resolution(resize), use_isp_resizer=use_isp_resizer)
             self._create_encoder(format, **options)
             if self.encoder:
                 self.encoder.connection.enable()
@@ -193,7 +193,7 @@ class PiEncoder(object):
             self.close()
             raise
 
-    def _create_resizer(self, width, height):
+    def _create_resizer(self, width, height, use_isp_resizer=False):
         """
         Creates and configures an :class:`~mmalobj.MMALResizer` component.
 
@@ -203,7 +203,10 @@ class PiEncoder(object):
         resizer - it does not connect it to the encoder. The method sets the
         :attr:`resizer` attribute to the constructed resizer component.
         """
-        self.resizer = mo.MMALResizer()
+        if use_isp_resizer:
+            self.resizer = mo.MMALISPResizer()
+        else:
+            self.resizer = mo.MMALResizer()
         self.resizer.inputs[0].connect(self.input_port)
         self.resizer.outputs[0].copy_from(self.resizer.inputs[0])
         self.resizer.outputs[0].format = mmal.MMAL_ENCODING_I420
