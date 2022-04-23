@@ -52,6 +52,7 @@ RECORDING_CASES = (
     RecordingCase('h264',  '.h264', {'profile': 'baseline'}),
     RecordingCase('h264',  '.h264', {'profile': 'high'}),
     RecordingCase('h264',  '.h264', {'resize': (640, 480)}),
+    RecordingCase('h264',  '.h264', {'resize': (640, 480), 'use_isp_resizer': True}),
     RecordingCase('h264',  '.h264', {'bitrate': 0, 'quality': 20}),
     RecordingCase('h264',  '.h264', {'bitrate': 1000000, 'quality': 40}),
     RecordingCase('h264',  '.h264', {'bitrate': 10000000, 'intra_period': 0}),
@@ -333,7 +334,7 @@ def test_record_bad_format(camera):
         camera.start_recording('test.h264', format='mp4')
 
 
-def test_record_bad_timestamp(camera):
+def _test_record_bad_timestamp(camera):
     # Frame timestamps should be positive integers in all cases. Prior to #357
     # getting fixed a None timestamp (from a 0 PTS) would be followed by a
     # large negative timestamp (from an unrecognized TIME_UNKNOWN timestamp)
