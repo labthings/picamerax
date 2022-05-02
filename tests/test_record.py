@@ -334,7 +334,7 @@ def test_record_bad_format(camera):
         camera.start_recording('test.h264', format='mp4')
 
 
-def _test_record_bad_timestamp(camera):
+def test_record_bad_timestamp(camera):
     # Frame timestamps should be positive integers in all cases. Prior to #357
     # getting fixed a None timestamp (from a 0 PTS) would be followed by a
     # large negative timestamp (from an unrecognized TIME_UNKNOWN timestamp)
