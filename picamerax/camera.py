@@ -377,6 +377,7 @@ class PiCamera(object):
         '_preview_layer',
         '_preview_fullscreen',
         '_preview_window',
+        '_isp',
         '_splitter',
         '_splitter_connection',
         '_encoders_lock',
@@ -398,6 +399,7 @@ class PiCamera(object):
         self._preview_layer = 2
         self._preview_fullscreen = True
         self._preview_window = None
+        self._isp = None
         self._splitter = None
         self._splitter_connection = None
         self._encoders_lock = threading.Lock()
@@ -417,8 +419,10 @@ class PiCamera(object):
             self._init_camera(options)
             self._configure_camera(old_config, new_config)
             self._init_preview()
+            self._init_isp()
             self._init_splitter()
             self._camera.enable()
+            self._isp.enable()
             self._init_defaults()
         except:
             self.close()
@@ -678,6 +682,16 @@ class PiCamera(object):
         self.hflip = self.vflip = False
         self.zoom = (0.0, 0.0, 1.0, 1.0)
 
+    def _init_isp(self):
+        """
+        Create an ISP component for the video port. This is to permit video
+        recordings and captures where use_video_port=True to have some
+        image processing in the ISP
+        """
+        self._isp = mo.MMALISPComponent()
+        self._isp.inputs[0].connect(
+                self._camera.outputs[self.CAMERA_VIDEO_PORT]).enable()
+
     def _init_splitter(self):
         """
         Create a splitter component for the video port. This is to permit video
@@ -686,7 +700,7 @@ class PiCamera(object):
         """
         self._splitter = mo.MMALSplitter()
         self._splitter.inputs[0].connect(
-                self._camera.outputs[self.CAMERA_VIDEO_PORT]).enable()
+                self._isp.outputs[0]).enable()
 
     def _init_preview(self):
         """
@@ -885,6 +899,13 @@ class PiCamera(object):
         All parameters are the same as in :meth:`_get_image_encoder`. Please
         refer to the documentation for that method for further information.
         """
+        if format == 'yuv':
+            # This avoids errors in test_capture.py when capturing sequences in
+            # 'yuv' format at 2592x1944 resolution using the video port.
+            self._disable_camera()
+            self._configure_isp(encoder_format=format)
+            self._configure_splitter()
+            self._enable_camera()
         encoder_class = (
                 PiRawMultiImageEncoder if format in self.RAW_FORMATS else
                 PiCookedMultiImageEncoder)
@@ -941,6 +962,9 @@ class PiCamera(object):
         if self._splitter:
             self._splitter.close()
             self._splitter = None
+        if self._isp:
+            self._isp.close()
+            self._isp = None
         if self._camera:
             self._camera.close()
             self._camera = None
@@ -2174,6 +2198,7 @@ class PiCamera(object):
         This disables the splitter and preview connections (if they exist).
         """
         self._splitter.connection.disable()
+        self._isp.connection.disable()
         self._preview.renderer.connection.disable()
         self._camera.disable()
 
@@ -2185,7 +2210,28 @@ class PiCamera(object):
         """
         self._camera.enable()
         self._preview.renderer.connection.enable()
+        self._isp.connection.enable()
         self._splitter.connection.enable()
+
+    def _configure_isp(self, encoder_format=None):
+        """
+        Ensures the ISP has the same format as the attached camera
+        output port (the video port).
+
+        This method is used to ensure the ISP configuration is sane,
+        typically after :meth:`_configure_camera` is called.
+        """
+        self._isp.inputs[0].copy_from(
+            self._camera.outputs[self.CAMERA_VIDEO_PORT])
+        self._isp.inputs[0].commit()
+        self._isp.outputs[0].framerate = self._camera.outputs[self.CAMERA_VIDEO_PORT].framerate
+        self._isp.outputs[0].framesize = self._camera.outputs[self.CAMERA_VIDEO_PORT].framesize
+        self._isp.outputs[0].colorspace = self._camera.outputs[self.CAMERA_VIDEO_PORT].colorspace
+        if encoder_format == 'yuv':
+            # This avoids errors in test_capture.py when capturing sequences in
+            # 'yuv' format at 2592x1944 resolution using the video port.
+            self._isp.outputs[0].format = mmal.MMAL_ENCODING_RGB16
+        self._isp.outputs[0].commit()
 
     def _configure_splitter(self):
         """
@@ -2196,7 +2242,7 @@ class PiCamera(object):
         typically after :meth:`_configure_camera` is called.
         """
         self._splitter.inputs[0].copy_from(
-            self._camera.outputs[self.CAMERA_VIDEO_PORT])
+            self._isp.outputs[0])
         self._splitter.inputs[0].commit()
 
     def _control_callback(self, port, buf):
@@ -2371,6 +2417,7 @@ class PiCamera(object):
         config = self._get_config()
         self._disable_camera()
         self._configure_camera(config, config._replace(framerate=value))
+        self._configure_isp()
         self._configure_splitter()
         self._enable_camera()
     framerate = property(_get_framerate, _set_framerate, doc="""\
@@ -2459,6 +2506,7 @@ class PiCamera(object):
         config = self._get_config()
         self._disable_camera()
         self._configure_camera(config, config._replace(sensor_mode=value))
+        self._configure_isp()
         self._configure_splitter()
         self._enable_camera()
     sensor_mode = property(_get_sensor_mode, _set_sensor_mode, doc="""\
@@ -2562,6 +2610,7 @@ class PiCamera(object):
         config = self._get_config()
         self._disable_camera()
         self._configure_camera(config, config._replace(lens_shading_table=value))
+        self._configure_isp()
         self._configure_splitter()
         self._enable_camera()
     lens_shading_table = property(_get_lens_shading_table, 
@@ -2635,6 +2684,7 @@ class PiCamera(object):
         config = self._get_config()
         self._disable_camera()
         self._configure_camera(config, config._replace(clock_mode=clock_mode))
+        self._configure_isp()
         self._configure_splitter()
         self._enable_camera()
     clock_mode = property(_get_clock_mode, _set_clock_mode, doc="""\
@@ -2674,6 +2724,7 @@ class PiCamera(object):
         config = self._get_config()
         self._disable_camera()
         self._configure_camera(config, config._replace(isp_blocks=isp_blocks))
+        self._configure_isp()
         self._configure_splitter()
         self._enable_camera()
     isp_blocks = property(_get_isp_blocks, _set_isp_blocks, doc="""\
@@ -2716,6 +2767,7 @@ class PiCamera(object):
         config = self._get_config()
         self._disable_camera()
         self._configure_camera(config, config._replace(colorspace=colorspace))
+        self._configure_isp()
         self._configure_splitter()
         self._enable_camera()
     colorspace = property(_get_colorspace, _set_colorspace, doc="""\
@@ -2763,6 +2815,7 @@ class PiCamera(object):
         config = self._get_config()
         self._disable_camera()
         self._configure_camera(config, config._replace(resolution=value))
+        self._configure_isp()
         self._configure_splitter()
         self._enable_camera()
     resolution = property(_get_resolution, _set_resolution, doc="""
@@ -2835,6 +2888,7 @@ class PiCamera(object):
         config = self._get_config()
         self._disable_camera()
         self._configure_camera(config, config._replace(framerate=(low, high)))
+        self._configure_isp()
         self._configure_splitter()
         self._enable_camera()
     framerate_range = property(_get_framerate_range, _set_framerate_range, doc="""\
