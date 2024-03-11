@@ -2526,7 +2526,15 @@ class PiCamera(object):
             # Given that we reset the camera each time anyway, hopefully we revert
             # to built-in lens shading correction by simply doing nothing here!
             return
-            
+
+	# Select the appropriated ref_transform value based on the camera model
+	# If camera model is not listed, use 3 as default
+        ref_transform_dict = {
+            'RP_ov5647': 0,
+            'RP_imx219': 3,
+        }
+        ref_transform = ref_transform_dict.get(self.exif_tags['IFD0.Model'], 3)
+
         with memoryview(lens_shading_table) as m:
             self._validate_lens_shading_table(m, sensor_mode)
             nchannels, grid_height, grid_width = m.shape
@@ -2545,7 +2553,7 @@ class PiCamera(object):
                 grid_stride = grid_width,
                 grid_height = grid_height,
                 mem_handle_table = shared_memory.videocore_handle,
-                ref_transform = 3,# TODO: figure out what this should be properly!!!
+                ref_transform = ref_transform,
                 )
 
             shared_memory.copy_from_memoryview(m) # copy in the array
