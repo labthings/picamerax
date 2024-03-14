@@ -46,7 +46,7 @@ except ImportError:
     pass
 
 __project__ = "picamerax"
-__version__ = "21.9.8"
+__version__ = "24.3.14"
 __author__ = "Dave Jones"
 __author_email__ = "dave@waveform.org.uk"
 __maintainer__ = "Joel Collins"
